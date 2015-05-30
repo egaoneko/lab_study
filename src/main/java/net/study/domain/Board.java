@@ -14,7 +14,6 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "study_board")
 public class Board {
 
     @Id

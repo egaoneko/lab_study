@@ -1,7 +1,13 @@
 package net.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import net.study.util.PasswordCrypto;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -13,44 +19,63 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "study_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
-    @Column(nullable = false, length = 50)
+    @NotEmpty
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false)
-    private String email;
+    @Column(unique = true, nullable = false)
+    private String login;
 
-    @Column(nullable = false)
+    @NotEmpty
     private String password;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
     private Date createdDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
     private Date lastDate;
 
-    @Column(nullable = false, length = 20, columnDefinition = "varchar(20) not null default 'ROLE_USER'")
-    private String authority;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private Set<Role> roles = new HashSet<Role>();
 
     //private String fileId;
-
 
     public User() {
     }
 
-    public int getId() {
+    public User(String name, String login, String password, Set<Role> roles) {
+        this.name = name;
+        this.login = login;
+        this.password = PasswordCrypto.getInstance().encrypt(password);
+        this.roles = roles;
+        this.createdDate = new Date();
+        this.lastDate = new Date();
+    }
+
+    public User(User user) {
+        super();
+        this.id = user.getId();
+        this.name = user.getName();
+        this.login = user.getLogin();
+        this.password = user.getPassword();
+        this.roles = user.getRoles();
+        this.createdDate = user.getCreatedDate();
+        this.lastDate = user.getLastDate();
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,12 +87,12 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -76,6 +101,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Date getCreatedDate() {
@@ -92,13 +125,5 @@ public class User {
 
     public void setLastDate(Date lastDate) {
         this.lastDate = lastDate;
-    }
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
     }
 }

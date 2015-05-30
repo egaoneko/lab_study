@@ -6,10 +6,9 @@
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
  -->
-
+<!DOCTYPE html>
 <html>
 <head>
-
     <title>게시글 목록</title>
 </head>
 <body>

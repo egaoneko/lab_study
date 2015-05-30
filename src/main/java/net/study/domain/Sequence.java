@@ -15,7 +15,6 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "study_no_sequence")
 public class Sequence {
 
     @Id

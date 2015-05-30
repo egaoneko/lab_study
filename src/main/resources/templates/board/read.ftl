@@ -1,3 +1,12 @@
+<#--
+ * First Editor : Donghyun Seo (egaoneko@naver.com)
+ * Last Editor  :
+ * Date         : 5/28/15
+ * Description  :
+ * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
+ * version      :
+ -->
+<!DOCTYPE html>
 <html>
 <head>
     <title>글 읽기</title>

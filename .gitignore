@@ -24,12 +24,10 @@ bin
 .settings
 .git
 .svn
-*.class
 *.bak
 .gradle
 .idea
 gradlew
 gradlew.bat
-*.iml
 gradle
 logs

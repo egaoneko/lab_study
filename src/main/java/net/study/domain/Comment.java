@@ -15,7 +15,6 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "study_comment")
 public class Comment {
 
     @Id

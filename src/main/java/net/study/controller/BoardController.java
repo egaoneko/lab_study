@@ -1,11 +1,9 @@
 package net.study.controller;
 
 import net.study.domain.Board;
-import net.study.error.BoardNotFoundException;
 import net.study.repository.BoardRepository;
 import net.study.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +24,6 @@ import java.util.List;
  * version      :
  */
 
-@SpringBootApplication
 @Controller
 @RequestMapping(value = "/article")
 public class BoardController {
@@ -39,10 +36,9 @@ public class BoardController {
      */
     @RequestMapping(value = "/list")
     public String boardList(Model model,
-                            @RequestParam(value = "p", required = false) Integer requestPage) throws Exception{
+                            @RequestParam(value = "p", required = false) Integer requestPage){
 
         if(requestPage == null) requestPage = 1;
-        //if(requestPage <= 0) return (ModelAndView)new ModelAndView("redirect:/board/list.do");
 
         int totalCount = (int)boardRepository.count();
 
@@ -83,7 +79,7 @@ public class BoardController {
      */
     @RequestMapping(value = "/write", method = RequestMethod.POST)
     public String boardWrite(@RequestParam(value = "title", required = true) String title,
-                             @RequestParam(value = "content", required = true ) String content) throws Exception{
+                             @RequestParam(value = "content", required = true ) String content){
 
 
 //        String memberId = util.isMemberId(auth);
@@ -103,11 +99,9 @@ public class BoardController {
      */
     @RequestMapping(value = "/read/{boardId}")
     public String boardRead(@PathVariable("boardId") Long boardId,
-                            Model model) throws Exception {
+                            Model model){
 
         Board board = boardRepository.findOne(boardId);
-
-        if(board == null) throw new BoardNotFoundException("게시글이 존재하지 않음 : " + boardId);
 
         board.setReadCount(board.getReadCount()+1);
         boardRepository.save(board);
@@ -121,12 +115,11 @@ public class BoardController {
      */
     @RequestMapping(value = "/update/{boardId}")
     public String boardUpdate(@PathVariable("boardId") Long boardId,
-                              Model model) throws Exception{
+                              Model model){
 
         //String memberId = util.isMemberId(auth);
 
         Board board = boardRepository.findOne(boardId);
-        if(board == null) throw new BoardNotFoundException("게시글이 존재하지 않음 : " + boardId);
 
         //util.isEqualMemberId(boardVO.getUserEmail(), memberId);
 
@@ -141,12 +134,11 @@ public class BoardController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String boardUpdate(@RequestParam(value = "boardId", required = true) Long boardId,
                               @RequestParam(value = "title", required = true) String title,
-                              @RequestParam(value = "content", required = true ) String content) throws Exception {
+                              @RequestParam(value = "content", required = true ) String content){
 
 //        String memberId = util.isMemberId(auth);
 
         Board board = boardRepository.findOne(boardId);
-        if(board == null) throw new BoardNotFoundException("게시글이 존재하지 않음 : " + boardId);
 
 //        util.isEqualMemberId(boardVO.getUserEmail(), memberId);
 
@@ -162,7 +154,7 @@ public class BoardController {
     게시판 삭제
      */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String boardDelete(@RequestParam(value = "boardId", required = true) Long boardId) throws Exception {
+    public String boardDelete(@RequestParam(value = "boardId", required = true) Long boardId){
 
 //        String memberId = util.isMemberId(auth);
 

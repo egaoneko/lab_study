@@ -6,7 +6,7 @@
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
  -->
-
+<!DOCTYPE html>
 <html>
 <head>
     <title>글쓰기</title>
