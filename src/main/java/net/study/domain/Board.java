@@ -34,12 +34,17 @@ public class Board {
     @Column(nullable = false, columnDefinition = "int default 0")
     private int readCount;
 
-    @OneToMany
-    @JoinColumn(referencedColumnName = "id")
+    @OneToMany(
+            targetEntity = Comment.class,
+            mappedBy = "board",
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.EAGER
+    )
     private List<Comment> commentList;
 
-    //@Column(nullable = false)
-    //private int userId;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     //@Column(nullable = false)
     //private int fileId;
@@ -95,4 +100,18 @@ public class Board {
         this.commentList = commentList;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean checkUser(User user){
+        if(this.user.getId() == user.getId()){
+            return true;
+        }
+        return false;
+    }
 }

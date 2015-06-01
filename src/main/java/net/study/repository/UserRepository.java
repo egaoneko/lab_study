@@ -3,6 +3,8 @@ package net.study.repository;
 import net.study.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
@@ -14,5 +16,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByLogin(String login);
+    Optional<User> findOneByEmail(String email);
 }

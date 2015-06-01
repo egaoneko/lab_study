@@ -1,13 +1,8 @@
 package net.study.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import net.study.util.PasswordCrypto;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -22,18 +17,22 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
+    private Long id;
 
-    @NotEmpty
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String passwordHash;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Column(nullable = false, length = 100)
     private String name;
-
-    @Column(unique = true, nullable = false)
-    private String login;
-
-    @NotEmpty
-    private String password;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
@@ -41,41 +40,43 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastDate;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    private Set<Role> roles = new HashSet<Role>();
+    @OneToMany(
+            targetEntity = Board.class,
+            mappedBy = "user",
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY
+    )
+    private List<Board> boards;
 
-    //private String fileId;
-
-    public User() {
-    }
-
-    public User(String name, String login, String password, Set<Role> roles) {
-        this.name = name;
-        this.login = login;
-        this.password = PasswordCrypto.getInstance().encrypt(password);
-        this.roles = roles;
-        this.createdDate = new Date();
-        this.lastDate = new Date();
-    }
-
-    public User(User user) {
-        super();
-        this.id = user.getId();
-        this.name = user.getName();
-        this.login = user.getLogin();
-        this.password = user.getPassword();
-        this.roles = user.getRoles();
-        this.createdDate = user.getCreatedDate();
-        this.lastDate = user.getLastDate();
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -85,30 +86,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 
     public Date getCreatedDate() {
@@ -125,5 +102,26 @@ public class User {
 
     public void setLastDate(Date lastDate) {
         this.lastDate = lastDate;
+    }
+
+    public List<Board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email.replaceFirst("@.*", "@***") +
+                ", passwordHash='" + passwordHash.substring(0, 10) +
+                ", role=" + role +
+                ", name=" + name +
+                ", createdDate=" + createdDate +
+                ", lastDate=" + lastDate +
+                '}';
     }
 }

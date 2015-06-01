@@ -6,8 +6,10 @@
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
  -->
+
+<#-- @ftlvariable name="board" type="net.study.domain.Board" -->
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>글 읽기</title>
 </head>
@@ -17,10 +19,10 @@
             <td>제목</td>
             <td>${board.title}</td>
         </tr>
-        <#--<tr>-->
-            <#--<td>작성자</td>-->
-            <#--<td>${board.writerName}</td>-->
-        <#--</tr>-->
+        <tr>
+            <td>작성자</td>
+            <td>${board.user.getName()}</td>
+        </tr>
         <tr>
             <td>작성일</td>
             <td>${board.postingDate}</td>

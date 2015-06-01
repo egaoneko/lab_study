@@ -7,7 +7,7 @@
  * version      :
  -->
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <title>사용자 목록</title>
 </head>

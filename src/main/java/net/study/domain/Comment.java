@@ -39,6 +39,7 @@ public class Comment {
     private String separatorName;
 
     @ManyToOne
+    @JoinColumn(name="board_id")
     @JsonBackReference
     private Board board;
 
