@@ -8,6 +8,7 @@
  -->
 
 <#-- @ftlvariable name="board" type="net.study.domain.Board" -->
+<#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -39,6 +40,7 @@
                 <input type="button" onclick="location.href='/article/list'" value="목록보기"/>
                 <input type="button" onclick="location.href='/article/update/${board.id}'" value="수정하기"/>
                 <form action="/article/delete" method="post" style="display: inline;">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="hidden" name="boardId" value="${board.id}"/>
                 <input type="submit" value="삭제하기" >
                 </form>

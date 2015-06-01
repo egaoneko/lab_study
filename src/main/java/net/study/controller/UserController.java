@@ -103,7 +103,7 @@ public class UserController {
             return "user/register";
         }
         // ok, redirect
-        return "redirect:/home";
+        return "redirect:/";
     }
 
 }

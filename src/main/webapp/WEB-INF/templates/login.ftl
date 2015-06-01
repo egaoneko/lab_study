@@ -42,7 +42,8 @@
         <label for="remember-me">Remember me</label>
         <input type="checkbox" name="remember-me" id="remember-me"/>
     </div>
-    <button type="submit">Sign in</button>
+    <input type="submit" value="Sign in"/>
+    <input type="button" onclick="location.href='/user/register'" value="Sign up"/>
 </form>
 
 <#if error.isPresent()>

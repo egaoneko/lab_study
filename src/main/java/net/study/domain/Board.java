@@ -1,6 +1,9 @@
 package net.study.domain;
 
+import freemarker.template.SimpleDate;
+
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -113,5 +116,26 @@ public class Board {
             return true;
         }
         return false;
+    }
+
+    public String getDifferentTime(){
+        long currentTime = System.currentTimeMillis();
+        Date date = this.postingDate;
+        long time = date.getTime();
+
+        long differentTime = currentTime - time;
+
+        if(differentTime < 60000){
+            return "just now";
+        }
+        else if(differentTime < 3600000){
+            return (int)(differentTime / 60000)+" minutes ago";
+        }
+        else if(differentTime < 86400000){
+            return (int)(differentTime / 3600000)+" hours ago";
+        }
+        else {
+            return new SimpleDateFormat("MM-dd").format(date).toString();
+        }
     }
 }
