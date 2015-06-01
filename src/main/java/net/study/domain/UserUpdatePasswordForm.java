@@ -7,16 +7,18 @@ import javax.validation.constraints.NotNull;
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
- * Date         : 5/31/15 | 1:30 PM
+ * Date         : 6/1/15 | 7:27 PM
  * Description  :
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
  */
 
-public class UserCreateForm {
+public class UserUpdatePasswordForm {
+
+    private long id;
 
     @NotEmpty
-    private String email = "";
+    private String oldPassword = "";
 
     @NotEmpty
     private String password = "";
@@ -24,18 +26,20 @@ public class UserCreateForm {
     @NotEmpty
     private String passwordRepeated = "";
 
-    @NotNull
-    private Role role = Role.USER;
-
-    @NotEmpty
-    private String name = "";
-
-    public String getEmail() {
-        return email;
+    public long getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 
     public String getPassword() {
@@ -54,30 +58,13 @@ public class UserCreateForm {
         this.passwordRepeated = passwordRepeated;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String toString() {
-        return "UserCreateForm{" +
-                "email='" + email.replaceFirst("@.+", "@***") + '\'' +
+        return "UserUpdateForm{" +
+                "id=" + id + '\'' +
+                ", oldPassword=***" + '\'' +
                 ", password=***" + '\'' +
-                ", passwordRepeated=***" + '\'' +
-                ", role=" + role + '\'' +
-                ", name=" + name +
+                ", passwordRepeated=***" +
                 '}';
     }
 }

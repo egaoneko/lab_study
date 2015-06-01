@@ -67,7 +67,7 @@ public class BoardController {
     public String boardWrite(Model model) throws Exception{
         LOGGER.debug("Getting board write form");
 
-        return "board/writeForm";
+        return "board/write";
     }
 
     @RequestMapping(value = "/write", method = RequestMethod.POST)
@@ -115,7 +115,7 @@ public class BoardController {
 
         model.addAttribute("board", board);
 
-        return "board/updateForm";
+        return "board/update";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

@@ -36,7 +36,7 @@
     </div>
     <div>
         <label for="name">Name</label>
-        <input type="name" name="name" id="name" value="${form.name}" required/>
+        <input type="text" name="name" id="name" value="${form.name}" required/>
     </div>
     <div>
         <label for="password">Password</label>

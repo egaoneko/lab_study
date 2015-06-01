@@ -2,6 +2,7 @@ package net.study.service.user;
 
 import net.study.domain.User;
 import net.study.domain.UserCreateForm;
+import net.study.domain.UserUpdatePasswordForm;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -24,5 +25,7 @@ public interface UserService {
     Collection<User> getAllUsers();
 
     User create(UserCreateForm form);
+
+    User updatePassword(UserUpdatePasswordForm form);
 
 }

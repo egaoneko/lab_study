@@ -2,6 +2,7 @@ package net.study.service.user;
 
 import net.study.domain.User;
 import net.study.domain.UserCreateForm;
+import net.study.domain.UserUpdatePasswordForm;
 import net.study.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,4 +65,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public User updatePassword(UserUpdatePasswordForm form) {
+        User user = userRepository.getOne(form.getId());
+        user.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
+
+        return userRepository.save(user);
+    }
 }
