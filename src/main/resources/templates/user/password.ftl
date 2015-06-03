@@ -2,7 +2,7 @@
 <#--
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
- * Date         : 6/01/15
+ * Date         : 6/1/15
  * Description  :
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
@@ -30,7 +30,7 @@
 
 <form role="form" name="form" action="password" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <input type="hidden" name="id" id="id" value="${currentUser.getId()}"/>
+    <input type="hidden" name="id" id="id" value="${currentUser.getId()?c}"/>
 
     <div>
         <label for="oldPassword">Old Password</label>

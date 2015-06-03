@@ -5,10 +5,12 @@ buildscript {
 
     repositories {
         maven { url "http://repo.spring.io/libs-snapshot" }
+        maven { url "https://plugins.gradle.org/m2/" }
         mavenLocal()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.10.RELEASE")
+        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.4")
     }
 }
 
@@ -20,6 +22,7 @@ apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
 
 war {
     baseName = 'lab_study'
@@ -40,11 +43,10 @@ dependencies {
     compile 'org.webjars:bootstrap:3.3.4'
     compile 'org.webjars:jquery:2.1.4'
 
-
     // DB
     compile 'mysql:mysql-connector-java:5.1.34'
 
-    // Spring Boot
+    // Spring
     compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-test'
@@ -55,9 +57,26 @@ dependencies {
     compile "org.springframework.security:spring-security-config:${springSecurityVersion}"
     compile "org.springframework.security.oauth:spring-security-oauth2:${springSecurityOAuthVersion}"
 
+    //query DSL
+    compile "com.mysema.querydsl:querydsl-apt:3.6.0"
+    compile "com.mysema.querydsl:querydsl-core:3.6.0"
+    compile "com.mysema.querydsl:querydsl-jpa:3.6.0"
+    providedCompile "com.mysema.querydsl:querydsl-apt:3.6.0"
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
+}
+
+//query DSL
+
+querydsl {
+    library = "com.mysema.querydsl:querydsl-apt:3.6.0"
+    querydslSourcesDir = "src/querydsl/java"
+}
+
+querydsl {
+    jpa = true
 }

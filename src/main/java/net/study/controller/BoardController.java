@@ -32,6 +32,9 @@ import java.util.List;
 public class BoardController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
+
+    private final int PAGE_PER_SIZE = 10;
+
     @Autowired
     private BoardRepository boardRepository;
 
@@ -45,13 +48,13 @@ public class BoardController {
         int totalCount = (int)boardRepository.count();
 
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = new PageRequest(0, 10, sort);
+        Pageable pageable = new PageRequest(requestPage-1, PAGE_PER_SIZE, sort);
         Page<Board> boards = boardRepository.findAll(pageable);
         List<Board> boardList = boards.getContent();
 
         model.addAttribute("boardList", boardList);
 
-        Paging paging = new Paging().paging(requestPage, 10, totalCount);
+        Paging paging = new Paging().paging(requestPage, PAGE_PER_SIZE, totalCount);
         model.addAttribute("paging", paging);
 
         if(totalCount == 0) {

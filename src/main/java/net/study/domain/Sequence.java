@@ -19,27 +19,27 @@ public class Sequence {
 
     @Id
     @Column(nullable = false, length = 10)
-    private String sequenceName;
+    private String name;
 
     @Column(nullable = false)
-    private int nextValue;
+    private long nextValue;
 
     public Sequence() {
     }
 
-    public String getSequenceName() {
-        return sequenceName;
+    public String getName() {
+        return name;
     }
 
-    public void setSequenceName(String sequenceName) {
-        this.sequenceName = sequenceName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getNextValue() {
+    public long getNextValue() {
         return nextValue;
     }
 
-    public void setNextValue(int nextValue) {
+    public void setNextValue(long nextValue) {
         this.nextValue = nextValue;
     }
 }

@@ -111,6 +111,9 @@ public class Board {
         this.user = user;
     }
 
+    /*
+    Login User Check
+     */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;
@@ -118,6 +121,9 @@ public class Board {
         return false;
     }
 
+    /*
+    Get Different Time
+     */
     public String getDifferentTime(){
         long currentTime = System.currentTimeMillis();
         Date date = this.postingDate;

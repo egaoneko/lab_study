@@ -48,6 +48,14 @@ public class User {
     )
     private List<Board> boards;
 
+    @OneToMany(
+            targetEntity = Comment.class,
+            mappedBy = "user",
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY
+    )
+    private List<Comment> comments;
+
     public Long getId() {
         return id;
     }
@@ -110,6 +118,14 @@ public class User {
 
     public void setBoards(List<Board> boards) {
         this.boards = boards;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

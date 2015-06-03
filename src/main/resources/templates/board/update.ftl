@@ -13,18 +13,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>수정하기</title>
+    <title>Article Update</title>
 </head>
 <body>
     <form action="" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <input type="hidden" name="boardId" value="${board.id}"/>
-        제목 : <input type="text" name="title" size="20" value="${board.title}"/><br/>
-        글내용 : <br/>
+        <input type="hidden" name="boardId" value="${board.id?c}"/>
+        Title : <input type="text" name="title" size="20" value="${board.title}"/><br/>
+        Content : <br/>
         <textarea name="content" cols="40" rows="5" >${board.content}</textarea>
         <br/>
-        <input type="submit" value="전송"/>
-        <input type="button" onclick="location.href='/article/read/${board.id}'" value="취소"/>
+        <input type="submit" value="Send"/>
+        <input type="button" onclick="location.href='/article/read/${board.id?c}'" value="Cancel"/>
     </form>
 </body>
 </html>

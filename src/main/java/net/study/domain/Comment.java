@@ -3,6 +3,7 @@ package net.study.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 
 @Entity
-public class Comment {
+public class Comment extends Reply{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,25 +36,24 @@ public class Comment {
     @Column(nullable = false)
     private Date postingDate;
 
-    @Column(nullable = false)
-    private String separatorName;
-
     @ManyToOne
     @JoinColumn(name="board_id")
     @JsonBackReference
     private Board board;
 
-    //private int userId;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     /*
-        중첩 레벨을 구해주는 메서드
+    Get reply level
      */
     public int getLevel(){
         if(sequenceNumber == null)          return -1;
         if(sequenceNumber.length() != 12)   return -1;
 
-        if(sequenceNumber.endsWith("99"))   return 0;   // 루트
-        return 1;   // 첫 번째 자식
+        if(sequenceNumber.endsWith("99"))   return 0;   // root
+        return 1;   // fist children
     }
 
     public Comment() {
@@ -99,19 +99,53 @@ public class Comment {
         this.postingDate = postingDate;
     }
 
-    public String getSeparatorName() {
-        return separatorName;
-    }
-
-    public void setSeparatorName(String separatorName) {
-        this.separatorName = separatorName;
-    }
-
     public Board getBoard() {
         return board;
     }
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /*
+    Login User Check
+     */
+    public boolean checkUser(User user){
+        if(this.user.getId() == user.getId()){
+            return true;
+        }
+        return false;
+    }
+
+    /*
+    Get Different Time
+     */
+    public String getDifferentTime(){
+        long currentTime = System.currentTimeMillis();
+        Date date = this.postingDate;
+        long time = date.getTime();
+
+        long differentTime = currentTime - time;
+
+        if(differentTime < 60000){
+            return "just now";
+        }
+        else if(differentTime < 3600000){
+            return (int)(differentTime / 60000)+" minutes ago";
+        }
+        else if(differentTime < 86400000){
+            return (int)(differentTime / 3600000)+" hours ago";
+        }
+        else {
+            return new SimpleDateFormat("MM-dd").format(date).toString();
+        }
     }
 }

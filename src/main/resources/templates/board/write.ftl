@@ -12,18 +12,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>글쓰기</title>
+    <title>Article Write</title>
 </head>
 <body>
     <form action="" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-        제목 : <input type="text" name="title" size="20"/><br/>
-        글내용: <br/>
+        Title : <input type="text" name="title" size="20"/><br/>
+        Content: <br/>
         <textarea name="content" cols="40" rows="5"></textarea>
         <br/>
-        <input type="submit" value="전송">
-        <input type="button" onclick="location.href='list'" value="취소"/>
+        <input type="submit" value="Send">
+        <input type="button" onclick="location.href='list'" value="Cancel"/>
     </form>
 </body>
 </html>

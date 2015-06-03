@@ -11,19 +11,16 @@ package net.study.util;
 
 public class Paging {
 
-    private int requestPage;        // 요청 페이지 번호
-    private int totalPageCount;     // 전체 페이지 수
-    private int firstRow;           // 첫 줄
-    private int endRow;             // 마지막 줄
-    private int beginPage;          // 시작 페이지
-    private int endPage;            // 끝 페이지v
+    private int requestPage;        // Request page
+    private int totalPageCount;     // Total page size
+    private int firstRow;           // First row
+    private int endRow;             // End row
+    private int beginPage;          // Begin page
+    private int endPage;            // End page
 
-    /*
-    페이징
-     */
     public Paging paging(int requestPage, int countPerPage, int totalCount) {
 
-        final int PAGING_PAGE = 10;
+        final int PAGE_PER_SIZE = 10;
         int totalPageCount = 0;
         int firstRow = 0;
         int endRow = 0;
@@ -32,30 +29,30 @@ public class Paging {
 
         if(totalCount != 0 || requestPage < 0) {
             /*
-            전체 게시글 개수로부터 전체 페이지 개수를 구해주는 부분
+            Get total page size from total article size
             */
-            // 총 게시글 : 31 / 페이지 당 글 : 10 일때
+            // Total Articles : 31 / Per Page : 10 일때
             totalPageCount = totalCount / countPerPage;         // pageCount : 3
             if(totalCount % countPerPage > 0) {
-                totalPageCount++;                               // 나머지가 1이므로 pageCount : 4
+                totalPageCount++;                               // remainder is 1. So add 1. pageCount : 4
             }
 
             /*
-            게시글의 첫 줄과 마지막 줄을 구하는 부분
+            Get first row and end row in articles
              */
             firstRow = (requestPage - 1) * countPerPage + 1;
-            endRow = firstRow + countPerPage - 1;               // 자기 자신도 포함되니 하나를 빼주어야 한다.
+            endRow = firstRow + countPerPage - 1;               // end row has itself. So count it out.
 
             if(endRow > totalCount){
                 endRow = totalCount;
             }
 
             /*
-            페이지의 시작과 끝을 알려주는 부분
+            Begin and End page for previous and next
              */
             if(totalCount != 0) {
-                beginPage = (requestPage - 1) / PAGING_PAGE * PAGING_PAGE + 1;
-                endPage = beginPage + PAGING_PAGE - 1;
+                beginPage = (requestPage - 1) / PAGE_PER_SIZE * PAGE_PER_SIZE + 1;
+                endPage = beginPage + PAGE_PER_SIZE - 1;
                 if(endPage > totalPageCount){
                     endPage = totalPageCount;
                 }

@@ -31,8 +31,8 @@
     <#if paging.totalPageCount &gt; 0>
         <tr>
             <td colspan="5">
-            ${paging.firstRow}-${paging.endRow}
-                [${paging.requestPage}/${paging.totalPageCount}]
+            ${paging.firstRow?c}-${paging.endRow?c}
+                [${paging.requestPage?c}/${paging.totalPageCount?c}]
             </td>
         </tr>
     </#if>
@@ -48,14 +48,14 @@
     <#if hasUser == false>
         <tr>
             <td colspan="5">
-                사용자가 없습니다.
+                Can not found users.
             </td>
         </tr>
 
     <#else>
         <#list userList as list>
             <tr>
-                <td><a href="/user/${list.id}">${list.email}</a></td>
+                <td><a href="/user/${list.id?c}">${list.email}</a></td>
                 <td>${list.name}</td>
                 <td>${list.role}</td>
                 <td>${list.createdDate?string("yyyy-MM-dd HH:mm")}</td>
@@ -67,13 +67,13 @@
         <tr>
             <td colspan="5">
                 <#if paging.beginPage &gt; 10>
-                    <a href="users?p=${pagingVO.beginPage-1}">이전</a>
+                    <a href="users?p=${(paging.beginPage-1)?c}">previous</a>
                 </#if>
                 <#list paging.beginPage..paging.endPage as pno>
-                    <a href="users?p=${pno}">[${pno}]</a>
+                    <a href="users?p=${pno?c}">[${pno?c}]</a>
                 </#list>
-                <#if paging.endPage < paging.totalPageCount>
-                    <a href="users?p=${paging.endPage + 1}">다음</a>
+                <#if paging.endPage &lt; paging.totalPageCount>
+                    <a href="users?p=${(paging.endPage + 1)?c}">next</a>
                 </#if>
             </td>
         </tr>

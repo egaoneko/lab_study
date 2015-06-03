@@ -1,0 +1,1 @@
+insert into sequence values ('comment', 0);
