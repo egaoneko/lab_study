@@ -8,6 +8,7 @@ import com.mysema.query.types.PathMetadata;
 import javax.annotation.Generated;
 import com.mysema.query.types.Path;
 import com.mysema.query.types.path.PathInits;
+import net.study.domain.enums.Role;
 
 
 /**

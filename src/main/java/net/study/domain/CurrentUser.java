@@ -1,5 +1,6 @@
 package net.study.domain;
 
+import net.study.domain.enums.Role;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 /**

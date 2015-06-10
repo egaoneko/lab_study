@@ -89,9 +89,11 @@
                     <form name="comment_ajaxForm" id="comment_ajaxForm" action="/comment/write" method="post">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="hidden" name="boardId" value="${boardId?c}">
-                        Content: <br/>
-                        <textarea name="content" id="content" cols="40" rows="5"></textarea>
-                        <br/>
+
+                        <div>
+                            <label for="content">Content</label>
+                            <textarea name="content" id="content" cols="40" rows="5" required></textarea>
+                        </div>
                     </form>
                     <button id="comment_ajaxForm_cancel" onclick="toggleWrite()" >Cancel</button>
                     <button id="comment_ajaxForm_submit" onclick="ajaxForm()" >Send</button>

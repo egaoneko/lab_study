@@ -1,21 +1,22 @@
 package net.study.domain;
 
+import net.study.domain.enums.*;
+
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
- * Date         : 5/26/15 | 7:59 PM
+ * Date         : 6/5/15 | 9:20 PM
  * Description  :
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
  */
 
 @Entity
-public class Board {
+public class Study {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,25 +33,37 @@ public class Board {
     @Column(nullable = false)
     private Date postingDate;
 
-    @Column(nullable = false, columnDefinition = "int default 0")
-    private int readCount;
-
-    @OneToMany(
-            targetEntity = Comment.class,
-            mappedBy = "board",
-            cascade = CascadeType.REMOVE,
-            fetch = FetchType.EAGER
-    )
-    private List<Comment> commentList;
-
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
 
-    //@Column(nullable = false)
-    //private int fileId;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
-    public Board() {
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Area area;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Charge charge;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OnOffLine onOffLine;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Way way;
+
+    @Column(nullable = false, columnDefinition = "int default 0")
+    private int price;
+
+    @Column(nullable = false, columnDefinition = "int default 1")
+    private int participant;
+
+    public Study() {
     }
 
     public Long getId() {
@@ -85,28 +98,68 @@ public class Board {
         this.postingDate = postingDate;
     }
 
-    public int getReadCount() {
-        return readCount;
-    }
-
-    public void setReadCount(int readCount) {
-        this.readCount = readCount;
-    }
-
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public Charge getCharge() {
+        return charge;
+    }
+
+    public void setCharge(Charge charge) {
+        this.charge = charge;
+    }
+
+    public OnOffLine getOnOffLine() {
+        return onOffLine;
+    }
+
+    public void setOnOffLine(OnOffLine onOffLine) {
+        this.onOffLine = onOffLine;
+    }
+
+    public Way getWay() {
+        return way;
+    }
+
+    public void setWay(Way way) {
+        this.way = way;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(int participant) {
+        this.participant = participant;
     }
 
     /*

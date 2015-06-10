@@ -1,5 +1,7 @@
 package net.study.domain;
 
+import net.study.domain.enums.Role;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;

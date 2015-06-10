@@ -56,7 +56,7 @@
         </tr>
         <tr>
             <td>Posting Date</td>
-            <td>${board.postingDate}</td>
+            <td>${board.getDifferentTime()}</td>
         </tr>
         <tr>
             <td>Content</td>

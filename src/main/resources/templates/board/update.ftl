@@ -19,10 +19,17 @@
     <form action="" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="hidden" name="boardId" value="${board.id?c}"/>
-        Title : <input type="text" name="title" size="20" value="${board.title}"/><br/>
-        Content : <br/>
-        <textarea name="content" cols="40" rows="5" >${board.content}</textarea>
-        <br/>
+
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" size="100" value="${board.title}" required autofocus/>
+        </div>
+
+        <div>
+            <label for="content">Content</label>
+            <textarea name="content" id="content" cols="40" rows="5" required>${board.content}</textarea>
+        </div>
+
         <input type="submit" value="Send"/>
         <input type="button" onclick="location.href='/article/read/${board.id?c}'" value="Cancel"/>
     </form>

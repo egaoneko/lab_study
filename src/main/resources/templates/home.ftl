@@ -37,6 +37,7 @@
         <li><a href="/users">View all users</a></li>
     </#if>
         <li><a href="/article/list">Article list</a></li>
+        <li><a href="/study/list">Study list</a></li>
     </ul>
 </nav>
 </body>

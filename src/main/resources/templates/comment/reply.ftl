@@ -16,9 +16,11 @@
             <form name="${parent.id?c}_ajaxForm_reply" id="${parent.id?c}_ajaxForm_reply" action="/comment/reply" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <input type="hidden" name="parentCommentId" value="${parent.id?c}"/>
-                Content: <br/>
-                <textarea name="content" id="${parent.id}_content_reply" cols="40" rows="5"></textarea>
-                <br/>
+
+                <div>
+                    <label for="content">Content</label>
+                    <textarea name="content" id="${parent.id}_content_reply" cols="40" rows="5" required></textarea>
+                </div>
             </form>
             <button id="${parent.id?c}_ajaxForm_cancel_reply" onclick="toggleReply('${parent.id?c}')" >Cancel</button>
             <button id="${parent.id?c}_ajaxForm_submit_reply" onclick="ajaxForm_reply('${parent.id?c}')" >Send</button>

@@ -67,7 +67,7 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/write")
-    public String boardWrite(Model model) throws Exception{
+    public String boardWrite() throws Exception{
         LOGGER.debug("Getting board write form");
 
         return "board/write";
@@ -121,9 +121,9 @@ public class BoardController {
         return "board/update";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update/{boardId}", method = RequestMethod.POST)
     public String boardUpdate(@ModelAttribute("currentUser")CurrentUser currentUser,
-                              @RequestParam(value = "boardId", required = true) Long boardId,
+                              @PathVariable("boardId") Long boardId,
                               @RequestParam(value = "title", required = true) String title,
                               @RequestParam(value = "content", required = true ) String content){
         LOGGER.debug("Getting board update for id={}, title={}, content={}", boardId, title, content);

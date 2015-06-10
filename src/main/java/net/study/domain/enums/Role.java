@@ -1,4 +1,4 @@
-package net.study.domain;
+package net.study.domain.enums;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)

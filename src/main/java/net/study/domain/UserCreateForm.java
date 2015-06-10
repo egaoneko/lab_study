@@ -1,5 +1,6 @@
 package net.study.domain;
 
+import net.study.domain.enums.Role;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;

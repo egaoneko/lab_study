@@ -1,7 +1,7 @@
 package net.study.service.currentuser;
 
 import net.study.domain.CurrentUser;
-import net.study.domain.Role;
+import net.study.domain.enums.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

@@ -45,17 +45,6 @@ public class Comment extends Reply{
     @JoinColumn(name="user_id")
     private User user;
 
-    /*
-    Get reply level
-     */
-    public int getLevel(){
-        if(sequenceNumber == null)          return -1;
-        if(sequenceNumber.length() != 12)   return -1;
-
-        if(sequenceNumber.endsWith("99"))   return 0;   // root
-        return 1;   // fist children
-    }
-
     public Comment() {
     }
 
@@ -147,5 +136,16 @@ public class Comment extends Reply{
         else {
             return new SimpleDateFormat("MM-dd").format(date).toString();
         }
+    }
+
+    /*
+    Get reply level
+     */
+    public int getLevel(){
+        if(sequenceNumber == null)          return -1;
+        if(sequenceNumber.length() != 12)   return -1;
+
+        if(sequenceNumber.endsWith("99"))   return 0;   // root
+        return 1;   // fist children
     }
 }
