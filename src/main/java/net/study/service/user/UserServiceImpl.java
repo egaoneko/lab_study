@@ -1,8 +1,8 @@
 package net.study.service.user;
 
 import net.study.domain.User;
-import net.study.domain.UserCreateForm;
-import net.study.domain.UserUpdatePasswordForm;
+import net.study.domain.form.UserCreateForm;
+import net.study.domain.form.UserUpdatePasswordForm;
 import net.study.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
 package net.study.domain.validator;
 
-import net.study.domain.UserCreateForm;
+import net.study.domain.form.UserCreateForm;
 import net.study.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

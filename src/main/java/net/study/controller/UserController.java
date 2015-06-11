@@ -1,9 +1,7 @@
 package net.study.controller;
 
-import net.study.domain.UserCreateForm;
-import net.study.domain.UserUpdatePasswordForm;
+import net.study.domain.form.UserCreateForm;
 import net.study.domain.validator.UserCreateFormValidator;
-import net.study.domain.validator.UserUpdatePasswordFormValidator;
 import net.study.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

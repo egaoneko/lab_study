@@ -1,4 +1,4 @@
-package net.study.domain;
+package net.study.domain.form;
 
 import net.study.domain.enums.Role;
 import org.hibernate.validator.constraints.NotEmpty;

@@ -2,8 +2,7 @@ package net.study.controller;
 
 import net.study.domain.CurrentUser;
 import net.study.domain.Study;
-import net.study.domain.StudyCreateForm;
-import net.study.domain.enums.*;
+import net.study.domain.form.StudyCreateForm;
 import net.study.domain.validator.StudyCreateFormValidator;
 import net.study.repository.StudyRepository;
 import net.study.service.study.StudyService;

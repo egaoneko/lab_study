@@ -1,7 +1,7 @@
 package net.study.controller;
 
 import net.study.domain.CurrentUser;
-import net.study.domain.UserUpdatePasswordForm;
+import net.study.domain.form.UserUpdatePasswordForm;
 import net.study.domain.validator.UserUpdatePasswordFormValidator;
 import net.study.repository.UserRepository;
 import net.study.service.user.UserService;

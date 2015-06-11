@@ -1,15 +1,13 @@
 package net.study.service.study;
 
 import net.study.domain.Study;
-import net.study.domain.StudyCreateForm;
-import net.study.domain.enums.*;
+import net.study.domain.form.StudyCreateForm;
 import net.study.repository.StudyRepository;
 import net.study.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.Date;
 

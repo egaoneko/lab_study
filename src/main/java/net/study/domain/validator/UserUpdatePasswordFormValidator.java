@@ -1,6 +1,6 @@
 package net.study.domain.validator;
 
-import net.study.domain.UserUpdatePasswordForm;
+import net.study.domain.form.UserUpdatePasswordForm;
 import net.study.repository.UserRepository;
 import net.study.service.user.UserService;
 import org.slf4j.Logger;

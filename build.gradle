@@ -63,6 +63,9 @@ dependencies {
     compile "com.mysema.querydsl:querydsl-jpa:3.6.0"
     providedCompile "com.mysema.querydsl:querydsl-apt:3.6.0"
 
+    //Freemarker Template Inheritance
+    compile 'kr.pe.kwonnam.freemarker:freemarker-template-inheritance:0.4.RELEASE'
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 

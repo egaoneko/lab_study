@@ -10,7 +10,7 @@
 
 <#-- @ftlvariable name="currentUser" type="net.study.domain.CurrentUser" -->
 <#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
-<#-- @ftlvariable name="form" type="net.study.domain.UserUpdatePasswordForm" -->
+<#-- @ftlvariable name="form" type="net.study.domain.form.UserUpdatePasswordForm" -->
 <#import "/spring.ftl" as spring>
 
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 package net.study.service.study;
 
 import net.study.domain.Study;
-import net.study.domain.StudyCreateForm;
+import net.study.domain.form.StudyCreateForm;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)

@@ -9,7 +9,7 @@
  -->
 
 <#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
-<#-- @ftlvariable name="form" type="net.study.domain.UserCreateForm" -->
+<#-- @ftlvariable name="form" type="net.study.domain.form.UserCreateForm" -->
 <#import "/spring.ftl" as spring>
 
 <!DOCTYPE html>
