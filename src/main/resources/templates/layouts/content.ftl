@@ -9,7 +9,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-        <title>Test</title>
+        <title></title>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">
@@ -19,13 +19,6 @@
 
     <@layout.put block="contents">
         <section>
-            <a href="javascript:void(0)" class="btn btn-default">Default</a>
-            <a href="javascript:void(0)" class="btn btn-primary">Primary</a>
-            <a href="javascript:void(0)" class="btn btn-success">Success</a>
-            <a href="javascript:void(0)" class="btn btn-info">Info</a>
-            <a href="javascript:void(0)" class="btn btn-warning">Warning</a>
-            <a href="javascript:void(0)" class="btn btn-danger">Danger</a>
-            <a href="javascript:void(0)" class="btn btn-link">Link</a>
         </section>
     </@layout.put>
 

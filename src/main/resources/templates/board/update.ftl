@@ -18,7 +18,6 @@
 <body>
     <form action="" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <input type="hidden" name="boardId" value="${board.id?c}"/>
 
         <div>
             <label for="title">Title</label>

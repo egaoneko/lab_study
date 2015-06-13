@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <td>Author</td>
-            <td>${board.user.getName()}</td>
+            <td>${board.user.name}</td>
         </tr>
         <tr>
             <td>Posting Date</td>

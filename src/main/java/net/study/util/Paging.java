@@ -31,7 +31,7 @@ public class Paging {
             /*
             Get total page size from total article size
             */
-            // Total Articles : 31 / Per Page : 10 일때
+            // Total Articles : 31 / Per Page : 10
             totalPageCount = totalCount / countPerPage;         // pageCount : 3
             if(totalCount % countPerPage > 0) {
                 totalPageCount++;                               // remainder is 1. So add 1. pageCount : 4

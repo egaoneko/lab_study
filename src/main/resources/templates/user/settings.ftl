@@ -41,49 +41,45 @@
 
         <section>
             <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
-                <section>
-                    <form role="form" action="password" method="post" class="form-horizontal">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <input type="hidden" name="id" id="id" value="${currentUser.getId()?c}"/>
+                <form role="form" action="password" method="post" class="form-horizontal">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="hidden" name="id" id="id" value="${currentUser.getId()?c}"/>
 
-                        <fieldset>
-                            <legend class="text-center">Change Password</legend>
-                            <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Old")>has-error</#if></#list></#if>">
-                                <div class="col-lg-12">
-                                    <input type="password" class="form-control" name="oldPassword" id="oldPassword" placeholder="Password" required autofocus>
-                                </div>
+                    <fieldset>
+                        <legend class="text-center">Change Password</legend>
+                        <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Old")>has-error</#if></#list></#if>">
+                            <div class="col-lg-12">
+                                <input type="password" class="form-control" name="oldPassword" id="oldPassword" placeholder="Password" required autofocus>
                             </div>
+                        </div>
 
-                            <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Passwords")>has-error</#if></#list></#if>">
-                                <div class="col-lg-12">
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="New Password" required>
-                                </div>
+                        <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Passwords")>has-error</#if></#list></#if>">
+                            <div class="col-lg-12">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="New Password" required>
                             </div>
+                        </div>
 
-                            <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Passwords")>has-error</#if></#list></#if>">
-                                <div class="col-lg-12">
-                                    <input type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Repeat Password" required>
-                                </div>
+                        <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Passwords")>has-error</#if></#list></#if>">
+                            <div class="col-lg-12">
+                                <input type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Repeat Password" required>
                             </div>
+                        </div>
 
-                            <div class="form-group text-center">
-                                <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-primary btn-lg">Update Password</button>
-                                    <a href="javascript:void(0)" class="help-block">Forgot password?</a>
-                                </div>
+                        <div class="form-group text-center">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-primary btn-lg">Update Password</button>
+                                <a href="javascript:void(0)" class="help-block">Forgot password?</a>
                             </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                    </fieldset>
+                </form>
 
-                    <hr>
-                    <legend class="text-center">Delete</legend>
-                    <a href="delete">Delete</a>
-                </section>
-            </div>
+                <hr>
 
+                <legend class="text-center">Delete</legend>
+                <a href="delete">Delete</a>
             </div>
         </section>
-
     </@layout.put>
 
     <@layout.put block="footer" type="replace">

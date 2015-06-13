@@ -32,7 +32,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/","/home","/article/list","/article/read/**","/comment/list/**","/user/register","/test","/index").permitAll()
+                    .antMatchers("/","/home","/index","/article/list","/article/read/**","/comment/list/**","/user/register").permitAll()
                     .antMatchers("/users/**").hasAuthority("ADMIN")
                     .antMatchers("/public/**","/resources/**","/resources/public/**","/webjars/**").permitAll()
                     .antMatchers("/css/**","/js/**","/img/**","/jui/**","/Material/**","/startbootstrap-creative/**").permitAll()
@@ -49,7 +49,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("remember-me")
                     .logoutSuccessUrl("/")
                     .permitAll()
-                    .and()
+                .and()
                 .rememberMe();
     }
 
