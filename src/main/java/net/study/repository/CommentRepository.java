@@ -21,4 +21,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, QueryDs
             "and c.sequenceNumber >= :searchMinSeqNum")
     String findBySequenceNumber(@Param("searchMaxSeqNum") String searchMaxSeqNum,
                                 @Param("searchMinSeqNum") String searchMinSeqNum);
+
+    long countByBoardId(Long boardId);
 }

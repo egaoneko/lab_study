@@ -12,7 +12,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-        <title>Home page</title>
+        <title>Study</title>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -92,6 +93,7 @@ public class BoardController {
 
     @RequestMapping(value = "/read/{boardId}")
     public String boardRead(@PathVariable("boardId") Long boardId,
+                            HttpServletRequest request,
                             Model model){
         LOGGER.debug("Getting board read page for id={}", boardId);
 
@@ -101,7 +103,13 @@ public class BoardController {
         boardRepository.save(board);
         model.addAttribute("board", board);
 
-        return "board/read";
+        String referer = request.getHeader("Referer");
+        LOGGER.debug("Getting Referer = {}, {}", referer);
+        if(referer.contains("/article/list")){
+            return "board/read";
+        }
+
+        return "board/readLayout";
     }
 
     @RequestMapping(value = "/update/{boardId}")

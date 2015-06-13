@@ -9,23 +9,37 @@
 
 <#-- @ftlvariable name="user" type="net.study.domain.User" -->
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <title>User details</title>
-</head>
-<body>
-<nav role="navigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-    </ul>
-</nav>
+<@layout.extends name="layouts/default.ftl">
+    <@layout.put block="head">
+        <title>Study/Profile</title>
+    </@layout.put>
 
-<h1>User details</h1>
+    <@layout.put block="header" type="prepend">
+        <@layout.extends name="layouts/header.ftl">
+        </@layout.extends>
+    </@layout.put>
 
-<p>E-mail: ${user.email}</p>
+    <@layout.put block="contents">
+        <section>
 
-<p>Role: ${user.role}</p>
-</body>
-</html>
+            <br>
+
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
+
+                <legend class="text-center">Profile</legend>
+
+                <p>E-mail: ${user.email}</p>
+
+                <p>Role: ${user.role}</p>
+            </div>
+        </section>
+    </@layout.put>
+
+    <@layout.put block="footer" type="replace">
+        <@layout.extends name="layouts/footer.ftl">
+        </@layout.extends>
+    </@layout.put>
+
+    <@layout.put block="script">
+    </@layout.put>
+</@layout.extends>

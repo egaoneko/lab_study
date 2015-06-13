@@ -11,74 +11,95 @@
 <#-- @ftlvariable name="paging" type="net.study.util.Paging" -->
 <#-- @ftlvariable name="hasUser" type="java.lang.Boolean" -->
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <title>List of Users</title>
-</head>
-<body>
-<nav role="navigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/user/create">Create a new user</a></li>
-    </ul>
-</nav>
+<@layout.extends name="layouts/default.ftl">
+    <@layout.put block="head">
+        <title>Study/Users</title>
+    </@layout.put>
 
-<h1>List of Users</h1>
+    <@layout.put block="header" type="prepend">
+        <@layout.extends name="layouts/header.ftl">
+        </@layout.extends>
+    </@layout.put>
 
-<table border="1">
-    <#if paging.totalPageCount &gt; 0>
-        <tr>
-            <td colspan="5">
-            ${paging.firstRow?c}-${paging.endRow?c}
-                [${paging.requestPage?c}/${paging.totalPageCount?c}]
-            </td>
-        </tr>
-    </#if>
+    <@layout.put block="contents">
+        <section>
 
-        <tr>
-            <td>Email</td>
-            <td>Name</td>
-            <td>Role</td>
-            <td>Created Date</td>
-            <td>Last Date</td>
-        </tr>
+            <br>
 
-    <#if hasUser == false>
-        <tr>
-            <td colspan="5">
-                Can not found users.
-            </td>
-        </tr>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
 
-    <#else>
-        <#list userList as list>
-            <tr>
-                <td><a href="/user/${list.id?c}">${list.email}</a></td>
-                <td>${list.name}</td>
-                <td>${list.role}</td>
-                <td>${list.createdDate?string("yyyy-MM-dd HH:mm")}</td>
-                <td>${list.lastDate?string("yyyy-MM-dd HH:mm")}</td>
-            </tr>
-        </#list>
+                <legend class="text-center">Users</legend>
 
-    <#-- Paging -->
-        <tr>
-            <td colspan="5">
-                <#if paging.beginPage &gt; 10>
-                    <a href="users?p=${(paging.beginPage-1)?c}">previous</a>
-                </#if>
-                <#list paging.beginPage..paging.endPage as pno>
-                    <a href="users?p=${pno?c}">[${pno?c}]</a>
-                </#list>
-                <#if paging.endPage &lt; paging.totalPageCount>
-                    <a href="users?p=${(paging.endPage + 1)?c}">next</a>
-                </#if>
-            </td>
-        </tr>
-    </#if>
-</table>
+                <table class="table table-striped table-hover">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Created Date</th>
+                            <th>Last Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <#if hasUser == false>
+                        <tr>
+                            <td colspan="5">
+                                Can not found users.
+                            </td>
+                        </tr>
 
-</body>
-</html>
+                        <#else>
+                            <#list userList as list>
+                            <tr>
+                                <td><a href="/user/${list.id?c}">${list.email}</a></td>
+                                <td>${list.name}</td>
+                                <td>${list.role}</td>
+                                <td>${list.createdDate?string("yyyy-MM-dd HH:mm")}</td>
+                                <td>${list.lastDate?string("yyyy-MM-dd HH:mm")}</td>
+                            </tr>
+                            </#list>
+                        </#if>
+                    </tbody>
+                </table>
+
+                <div class="text-center">
+                    <ul class="pagination">
+                        <#if paging.beginPage &gt; 10>
+                            <li><a href="list?p=${(paging.beginPage - 1)?c}">«</a></li>
+                        <#else>
+                            <li class="disabled"><a href="javascript:void(0)">«</a></li>
+                        </#if>
+
+                        <#list paging.beginPage..paging.endPage as pno>
+                            <#if paging.requestPage == pno>
+                                <li class="active"><a href="list?p=${pno?c}">${pno?c}</a></li>
+                            <#else>
+                                <li><a href="list?p=${pno?c}">${pno?c}</a></li>
+                            </#if>
+                        </#list>
+
+                        <#if paging.endPage &lt; paging.totalPageCount>
+                            <li><a href="list?p=${(paging.endPage + 1)?c}">»</a></li>
+                        <#else>
+                            <li class="disabled"><a href="javascript:void(0)">»</a></li>
+                        </#if>
+                    </ul>
+                </div>
+
+                <div class="text-right">
+                    <#if currentUser??>
+                        <a href="/user/create" class="btn btn-primary btn-raised">Create</a>
+                    </#if>
+                </div>
+            </div>
+        </section>
+    </@layout.put>
+
+    <@layout.put block="footer" type="replace">
+        <@layout.extends name="layouts/footer.ftl">
+        </@layout.extends>
+    </@layout.put>
+
+    <@layout.put block="script">
+    </@layout.put>
+</@layout.extends>

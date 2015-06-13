@@ -10,27 +10,59 @@
 <#-- @ftlvariable name="board" type="net.study.domain.Board" -->
 <#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <title>Article Update</title>
-</head>
-<body>
-    <form action="" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<@layout.extends name="layouts/default.ftl">
+    <@layout.put block="head">
+        <title>Study/Article/Update</title>
+    </@layout.put>
 
-        <div>
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" size="100" value="${board.title}" required autofocus/>
-        </div>
+    <@layout.put block="header" type="prepend">
+        <@layout.extends name="layouts/header.ftl">
+        </@layout.extends>
+    </@layout.put>
 
-        <div>
-            <label for="content">Content</label>
-            <textarea name="content" id="content" cols="40" rows="5" required>${board.content}</textarea>
-        </div>
+    <@layout.put block="contents">
+        <section>
 
-        <input type="submit" value="Send"/>
-        <input type="button" onclick="location.href='/article/read/${board.id?c}'" value="Cancel"/>
-    </form>
-</body>
-</html>
+            <br>
+
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
+                <section>
+                    <form role="form" action="" method="post" class="form-horizontal">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+                        <fieldset>
+                            <legend class="text-center">Article Update</legend>
+
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" name="title" id="title" placeholder="Title" value="${board.title}" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <textarea class="form-control" rows="20" name="content" id="content" required>${board.content}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-12 text-center">
+                                    <input type="button" class="btn btn-danger" onclick="location.href='/article/read/${board.id?c}'" value="Cancel"/>
+                                    <input type="submit" class="btn btn-success" value="Submit"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </@layout.put>
+
+    <@layout.put block="footer" type="replace">
+        <@layout.extends name="layouts/footer.ftl">
+        </@layout.extends>
+    </@layout.put>
+
+    <@layout.put block="script">
+    </@layout.put>
+</@layout.extends>

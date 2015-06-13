@@ -70,18 +70,19 @@ public class SettingsController {
         return "redirect:/settings/admin";
     }
 
-    @RequestMapping(value = "/settings/delete", method = RequestMethod.GET)
-    public String getSettingsDelete(){
-        return "user/delete";
-    }
-
     @RequestMapping(value = "/settings/delete", method = RequestMethod.POST)
     public ModelAndView handleSettingsDelete(@ModelAttribute("currentUser")CurrentUser currentUser,
-                                       @RequestParam(value = "password", required = true) String password){
+                                             @RequestParam(value = "password", required = true) String password){
+
+        LOGGER.debug("Delete User id={}", currentUser.getId());
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (!passwordEncoder.matches(password, currentUser.getUser().getPasswordHash())) {
-            return new ModelAndView("user/delete","error","Passwords do not match");
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("user/settings");
+            modelAndView.addObject("form", new UserUpdatePasswordForm());
+            modelAndView.addObject("deleteError","Passwords do not match");
+            return modelAndView;
         }
 
         userRepository.delete(currentUser.getId());

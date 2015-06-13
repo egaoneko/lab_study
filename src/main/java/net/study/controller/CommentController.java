@@ -63,7 +63,7 @@ public class CommentController {
 
         if(requestPage == null) requestPage = 1;
 
-        int totalCount = (int)commentRepository.count();
+        int totalCount = (int)commentRepository.countByBoardId(boardId);
 
         Sort sort = new Sort(Sort.Direction.DESC, "sequenceNumber");
         Pageable pageable = new PageRequest(requestPage-1, PAGE_PER_SIZE, sort);

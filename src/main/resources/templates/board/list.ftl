@@ -11,10 +11,15 @@
 <#-- @ftlvariable name="paging" type="net.study.util.Paging" -->
 <#-- @ftlvariable name="hasBoard" type="java.lang.Boolean" -->
 <#-- @ftlvariable name="currentUser" type="net.study.domain.CurrentUser" -->
+<#-- @ftlvariable name="rc" type="javax.servlet.http.HttpServletRequest" -->
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-        <title>Study/Article/List</title>
+        <title>Study/Article List</title>
+
+        <meta name="_csrf" content="${_csrf.token}"/>
+        <!-- default header name is X-CSRF-TOKEN -->
+        <meta name="_csrf_header" content="${_csrf.headerName}"/>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">
@@ -54,7 +59,7 @@
                             <tr>
                                 <td>${list.id?c}</td>
                                 <td>
-                                    <a href="read/${list.id?c}?p=${paging.requestPage?c}">
+                                    <a href="javascript:void(0)" onclick="load_page(${list.id?c})" data-toggle="modal" data-target="#read-dialog">
                                     ${list.title}
                                     </a>
                                 </td>
@@ -96,6 +101,20 @@
                         <a href="write" class="btn btn-primary btn-raised">Write</a>
                     </#if>
                 </div>
+
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <div id="read-dialog" class="modal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div id="read" class="modal-body"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
     </@layout.put>
@@ -106,5 +125,19 @@
     </@layout.put>
 
     <@layout.put block="script">
+    <script src="/js/comment.js"></script>
+    <script type="text/javascript">
+
+        contextPath = "${rc.getContextPath()}";
+
+        function load_page(id) {
+
+            // Loading 0.5 seconds
+            setTimeout(function() {
+
+                $('#read').load(contextPath + "/article/read/"+id)
+            }, 500);
+        }
+    </script>
     </@layout.put>
 </@layout.extends>

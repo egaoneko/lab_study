@@ -45,12 +45,12 @@
                 <#if !currentUser??><li><a href="/login">Sign In</a></li>
                 <#else>
                     <li class="dropdown">
-                        <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">${currentUser.getName()} <b class="caret"></b></a>
+                        <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/img/user.png" style="width:20px; height:20px;" alt="icon"><b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0)">Action</a></li>
-                            <li><a href="javascript:void(0)">Another action</a></li>
-                            <li><a href="javascript:void(0)">Something else here</a></li>
+                            <li><p class="text-muted text-center">Signed in as ${currentUser.name}</p></li>
+                            <li><a href="/user/${currentUser.id?c}">Profile</a></li>
                             <li class="divider"></li>
+                            <li class="dropdown-header">Account</li>
                             <li><a href="/settings/admin">Settings</a></li>
                             <li>
                                 <a href="javascript:void(0)" onclick="document.getElementById('logout').submit();">Sign Out</a>

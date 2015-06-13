@@ -14,7 +14,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-        <title>Sign Up</title>
+        <title>Study/SignUp</title>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">
@@ -28,7 +28,7 @@
             <@spring.bind "form" />
             <#if spring.status.error>
                 <#list spring.status.errorMessages as error>
-                    <div class="alert alert-dismissable alert-danger">
+                    <div class="alert alert-dismissable alert-danger text-center">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <p>${error}</p>
                     </div>
@@ -39,7 +39,7 @@
         <section class="vertical-center">
             <div class="col-xs-9 col-sm-6 col-md-5 col-lg-4 well">
                 <section>
-                    <form role="form" action="/user/register" method="post" class="form-horizontal">
+                    <form role="form" action="" method="post" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                         <fieldset>

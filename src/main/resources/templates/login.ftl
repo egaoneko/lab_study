@@ -12,7 +12,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-    <title>Sign In</title>
+    <title>Study/Sign In</title>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">
@@ -24,7 +24,7 @@
     <@layout.put block="contents">
         <section>
             <#if error.isPresent()>
-                <div class="alert alert-dismissable alert-danger">
+                <div class="alert alert-dismissable alert-danger text-center">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <p>The email or password you have entered is invalid, try again.</p>
                 </div>
