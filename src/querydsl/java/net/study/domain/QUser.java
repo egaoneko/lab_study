@@ -8,7 +8,6 @@ import com.mysema.query.types.PathMetadata;
 import javax.annotation.Generated;
 import com.mysema.query.types.Path;
 import com.mysema.query.types.path.PathInits;
-import net.study.domain.enums.Role;
 
 
 /**
@@ -37,7 +36,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath passwordHash = createString("passwordHash");
 
-    public final EnumPath<Role> role = createEnum("role", Role.class);
+    public final EnumPath<net.study.domain.enums.Role> role = createEnum("role", net.study.domain.enums.Role.class);
 
     public QUser(String variable) {
         super(User.class, forVariable(variable));

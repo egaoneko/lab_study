@@ -48,6 +48,9 @@ public class StudyCreateForm {
     @NotNull
     private int participant = 1;
 
+    @NotNull
+    private Status status = Status.OPEN;
+
     public Long getId() {
         return id;
     }
@@ -136,6 +139,14 @@ public class StudyCreateForm {
         this.participant = participant;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     public Category[] getCategoryList(){
         return Category.values();
     }
@@ -156,6 +167,10 @@ public class StudyCreateForm {
         return Way.values();
     }
 
+    public Status[] getStatusList(){
+        return Status.values();
+    }
+
     public String toString() {
         return "StudyCreateForm{" +
                 "title=" + title + '\'' +
@@ -167,7 +182,8 @@ public class StudyCreateForm {
                 "onOffLine=" + onOffLine + '\'' +
                 "way=" + way + '\'' +
                 "price=" + price + '\'' +
-                "participant" + participant +
+                "participant=" + participant + '\'' +
+                "status" + status +
                 '}';
     }
 }

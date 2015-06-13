@@ -63,6 +63,10 @@ public class Study {
     @Column(nullable = false, columnDefinition = "int default 1")
     private int participant;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     public Study() {
     }
 
@@ -162,9 +166,17 @@ public class Study {
         this.participant = participant;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     /*
-        Login User Check
-         */
+            Login User Check
+             */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;

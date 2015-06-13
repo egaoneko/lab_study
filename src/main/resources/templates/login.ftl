@@ -10,44 +10,71 @@
 <#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
 <#-- @ftlvariable name="error" type="java.util.Optional<String>" -->
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <title>Log in</title>
-</head>
-<body>
-<nav role="navigation">
-    <ul>
-        <li><a href="/">Home</a></li>
-    </ul>
-</nav>
+<@layout.extends name="layouts/default.ftl">
+    <@layout.put block="head">
+    <title>Sign In</title>
+    </@layout.put>
 
-<h1>Log in</h1>
+    <@layout.put block="header" type="prepend">
+        <#--<@layout.extends name="layouts/header.ftl">-->
+        <#--</@layout.extends>-->
+    </@layout.put>
 
-<p>You can use: demo@localhost / demo</p>
 
-<form role="form" action="/login" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <@layout.put block="contents">
+        <section>
+            <#if error.isPresent()>
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <p>The email or password you have entered is invalid, try again.</p>
+                </div>
+            </#if>
+        </section>
 
-    <div>
-        <label for="email">Email address</label>
-        <input type="email" name="email" id="email" required autofocus/>
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required/>
-    </div>
-    <div>
-        <label for="remember-me">Remember me</label>
-        <input type="checkbox" name="remember-me" id="remember-me"/>
-    </div>
-    <input type="submit" value="Sign in"/>
-    <input type="button" onclick="location.href='/user/register'" value="Sign up"/>
-</form>
+        <section class="vertical-center">
+            <div class="col-xs-9 col-sm-6 col-md-5 col-lg-4 well">
+                <section>
+                    <form role="form" action="/login" method="post" class="form-horizontal">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
-<#if error.isPresent()>
-<p>The email or password you have entered is invalid, try again.</p>
-</#if>
-</body>
-</html>
+                        <fieldset>
+                            <legend class="text-center">Sign In</legend>
+                            <div class="form-group <#if error.isPresent()>has-error</#if>">
+                                <div class="col-lg-12">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group <#if error.isPresent()>has-error</#if>">
+                                <div class="col-lg-12">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                                    <br>
+                                    <div class="togglebutton text-center">
+                                        <label>
+                                            <input type="checkbox" checked="" name="remember-me" id="remember-me"> Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+                                    <a href="javascript:void(0)" class="help-block">Forgot password?</a>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </@layout.put>
+
+    <@layout.put block="footer" type="replace">
+        <@layout.extends name="layouts/footer.ftl">
+        </@layout.extends>
+    </@layout.put>
+
+    <@layout.put block="script">
+    </@layout.put>
+</@layout.extends>

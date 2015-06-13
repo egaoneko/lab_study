@@ -47,26 +47,26 @@
 
     <div>
         <p>Charge</p>
-    <#list form.getChargeList() as list>
-        <input type="radio" name="charge" id="charge_${list_index}" value="${list}" <#if form.charge == list >checked</#if>/>
-        <label for="charge_${list_index}">${list.title}</label>
-    </#list>
+        <#list form.getChargeList() as list>
+            <input type="radio" name="charge" id="charge_${list_index}" value="${list}" <#if form.charge == list >checked</#if>/>
+            <label for="charge_${list_index}">${list.title}</label>
+        </#list>
     </div>
 
     <div>
         <p>On-Off Line</p>
-    <#list form.getOnOffLineList() as list>
-        <input type="radio" name="onOffLine" id="onOffLine_${list_index}" value="${list}" <#if form.onOffLine == list >checked</#if>/>
-        <label for="onOffLine_${list_index}">${list.title}</label>
-    </#list>
+        <#list form.getOnOffLineList() as list>
+            <input type="radio" name="onOffLine" id="onOffLine_${list_index}" value="${list}" <#if form.onOffLine == list >checked</#if>/>
+            <label for="onOffLine_${list_index}">${list.title}</label>
+        </#list>
     </div>
 
     <div>
         <p>Way</p>
-    <#list form.getWayList() as list>
-        <input type="radio" name="way" id="way_${list_index}" value="${list}" <#if form.way == list >checked</#if>/>
-        <label for="way_${list_index}">${list.title}</label>
-    </#list>
+        <#list form.getWayList() as list>
+            <input type="radio" name="way" id="way_${list_index}" value="${list}" <#if form.way == list >checked</#if>/>
+            <label for="way_${list_index}">${list.title}</label>
+        </#list>
     </div>
 
     <div>
@@ -77,6 +77,14 @@
     <div>
         <label for="participant">Participant</label>
         <input type="text" name="participant" id="participant" value="${form.participant}" required/>
+    </div>
+
+    <div>
+        <p>Status</p>
+        <#list form.getStatusList() as list>
+            <input type="radio" name="status" id="status_${list_index}" value="${list}" <#if form.status == list >checked</#if>/>
+            <label for="way_${list_index}">${list.title}</label>
+        </#list>
     </div>
 
     <div>

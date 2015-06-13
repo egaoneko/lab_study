@@ -51,7 +51,7 @@ public class UserUpdatePasswordFormValidator implements Validator {
     private void validateOldPasswords(Errors errors, UserUpdatePasswordForm form) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (!passwordEncoder.matches(form.getOldPassword(), userRepository.getOne(form.getId()).getPasswordHash())) {
-            errors.reject("oldPassword.no_match", "Old Passwords do not match");
+            errors.reject("oldPassword.no_match", "Old Password do not match");
         }
     }
 

@@ -67,6 +67,11 @@
         </tr>
 
         <tr>
+            <td>Status</td>
+            <td>${study.status}</td>
+        </tr>
+
+        <tr>
             <td>Content</td>
             <td>${study.content}</td>
         </tr>

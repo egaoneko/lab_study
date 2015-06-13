@@ -1,8 +1,10 @@
 package net.study.controller;
 
+import net.study.domain.CurrentUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -20,9 +22,14 @@ public class HomeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping(value = "/")
-    public String getHomePage() {
+    public String getHomePage(@ModelAttribute("currentUser")CurrentUser currentUser) {
         LOGGER.debug("Getting home page");
-        return "home";
+
+        if(currentUser==null){
+            return "index";
+        } else {
+            return "home";
+        }
     }
 
 }

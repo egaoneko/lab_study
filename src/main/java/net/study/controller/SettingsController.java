@@ -52,8 +52,8 @@ public class SettingsController {
 
     @RequestMapping(value = "/settings/admin", method = RequestMethod.GET)
     public ModelAndView getSettingsAdmin() {
-        LOGGER.debug("Getting settins admin form");
-        return new ModelAndView("user/password", "form", new UserUpdatePasswordForm());
+        LOGGER.debug("Getting settings admin form");
+        return new ModelAndView("user/settings", "form", new UserUpdatePasswordForm());
     }
 
     @RequestMapping(value = "/settings/password", method = RequestMethod.POST)
@@ -61,7 +61,7 @@ public class SettingsController {
         LOGGER.debug("Processing user register form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {
             // failed validation
-            return "user/password";
+            return "user/settings";
         }
 
         userService.updatePassword(form);

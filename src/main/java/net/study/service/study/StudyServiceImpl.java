@@ -47,6 +47,7 @@ public class StudyServiceImpl implements StudyService {
         study.setWay(form.getWay());
         study.setPrice(form.getPrice());
         study.setParticipant(form.getParticipant());
+        study.setStatus(form.getStatus());
 
         return studyRepository.save(study);
     }
@@ -64,6 +65,7 @@ public class StudyServiceImpl implements StudyService {
         study.setWay(form.getWay());
         study.setPrice(form.getPrice());
         study.setParticipant(form.getParticipant());
+        study.setStatus(form.getStatus());
 
         return studyRepository.save(study);
     }
@@ -83,6 +85,7 @@ public class StudyServiceImpl implements StudyService {
         studyCreateForm.setWay(study.getWay());
         studyCreateForm.setPrice(study.getPrice());
         studyCreateForm.setParticipant(study.getParticipant());
+        studyCreateForm.setStatus(study.getStatus());
 
         return studyCreateForm;
     }

@@ -18,7 +18,7 @@
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
-    <script type="text/javascript" src="/webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/webjars/jquery/2.1.4/jquery.min.js"></script>
 
     <script src="/js/comment.js"></script>
     <script type="text/javascript">
