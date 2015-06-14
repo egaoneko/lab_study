@@ -34,7 +34,7 @@
 
                             <div class="form-group">
                                 <div class="col-lg-12">
-                                    <input type="text" class="form-control" name="title" id="title" placeholder="Title" required autofocus>
+                                    <input type="text" class="form-control" name="title" id="title" placeholder="Title" size="100" required autofocus>
                                 </div>
                             </div>
 

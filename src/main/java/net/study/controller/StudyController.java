@@ -56,7 +56,7 @@ public class StudyController {
         binder.addValidators(studyCreateFormValidator);
     }
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String studyList(Model model,
                             @RequestParam(value = "p", required = false) Integer requestPage){
         LOGGER.debug("Getting study list page for page number={}", requestPage);
@@ -84,7 +84,7 @@ public class StudyController {
         return "study/list";
     }
 
-    @RequestMapping(value = "/write")
+    @RequestMapping(value = "/write", method = RequestMethod.GET)
     public ModelAndView studyWrite() throws Exception{
         LOGGER.debug("Getting study write form");
         return new ModelAndView("study/write", "form", new StudyCreateForm());
@@ -109,7 +109,7 @@ public class StudyController {
         return "redirect:/study/list";
     }
 
-    @RequestMapping(value = "/read/{studyId}")
+    @RequestMapping(value = "/read/{studyId}", method = RequestMethod.GET)
     public String studyRead(@PathVariable("studyId") Long studyId,
                             Model model){
         LOGGER.debug("Getting study read page for id={}", studyId);
@@ -120,7 +120,7 @@ public class StudyController {
         return "study/read";
     }
 
-    @RequestMapping(value = "/update/{studyId}")
+    @RequestMapping(value = "/update/{studyId}", method = RequestMethod.GET)
     public ModelAndView studyUpdate(@ModelAttribute("currentUser")CurrentUser currentUser,
                                     @PathVariable("studyId") Long studyId){
         LOGGER.debug("Getting study update form for id={}", studyId);

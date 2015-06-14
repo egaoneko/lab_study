@@ -1,15 +1,19 @@
 package net.study.util;
 
 import net.study.domain.Reply;
-import net.study.domain.User;
 import net.study.error.CannotReplyException;
 import net.study.error.LastChildAlreadyExistsException;
 import net.study.error.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Random;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -22,6 +26,8 @@ import java.util.Date;
 
 @Component
 public class Utils {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
 
     /*
     Check Parent
@@ -151,4 +157,44 @@ public class Utils {
         return sequenceNumber;
     }
      */
+
+    /*
+    Generate random string by length
+     */
+    public String randomString(int length) {
+
+        LOGGER.debug("Utils random string, length={}", length);
+
+        if (length < 1) throw new IllegalArgumentException("length < 1: " + length);
+
+        char[] symbols;
+        char[] buf;
+
+        StringBuilder tmp = new StringBuilder();
+        Random random = new Random();
+
+        for (char ch = '0'; ch <= '9'; ++ch) tmp.append(ch);
+        for (char ch = 'a'; ch <= 'z'; ++ch) tmp.append(ch);
+        symbols = tmp.toString().toCharArray();
+
+        buf = new char[length];
+
+        for (int idx = 0; idx < buf.length; ++idx) buf[idx] = symbols[random.nextInt(symbols.length)];
+        return new String(buf);
+    }
+
+    /*
+    Generate random hash by string
+     */
+    public String getRandomHash(String str) {
+
+        LOGGER.debug("Utils random string, str={}", str);
+
+        SecureRandom random = new SecureRandom();
+        String randomString = new BigInteger(130, random).toString(32);
+
+        LOGGER.debug("Utils random string, randomString={}", randomString);
+
+        return new BCryptPasswordEncoder().encode(str + randomString);
+    }
 }

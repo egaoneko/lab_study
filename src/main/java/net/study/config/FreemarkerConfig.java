@@ -27,7 +27,7 @@ public class FreemarkerConfig {
 
     @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer() {
-        FreeMarkerConfigurer fmc = new FreeMarkerConfigurer();
+        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
 
         Map<String, Object> freemarkerLayoutDirectives = new HashMap<>();
         freemarkerLayoutDirectives.put("extends", new ExtendsDirective());
@@ -37,25 +37,25 @@ public class FreemarkerConfig {
         Map<String, Object> layout = new HashMap<>();
         layout.put("layout", freemarkerLayoutDirectives);
 
-        fmc.setFreemarkerVariables(layout);
-        fmc.setDefaultEncoding("UTF-8");
-        fmc.setTemplateLoaderPath("classpath:templates");
-        return fmc;
+        freeMarkerConfigurer.setFreemarkerVariables(layout);
+        freeMarkerConfigurer.setDefaultEncoding("UTF-8");
+        freeMarkerConfigurer.setTemplateLoaderPath("classpath:templates");
+        return freeMarkerConfigurer;
     }
 
     @Bean
     public ViewResolver freeMarkerViewResolver() {
-        FreeMarkerViewResolver fvr = new FreeMarkerViewResolver();
+        FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
 
-        fvr.setCache(true);
-        fvr.setPrefix("");
-        fvr.setSuffix(".ftl");
-        fvr.setContentType("text/html;charset=UTF-8");
-        fvr.setExposeSpringMacroHelpers(true);
-        fvr.setExposeRequestAttributes(true);
-        fvr.setExposeSessionAttributes(true);
-        fvr.setRequestContextAttribute("rc");
-        return fvr;
+        freeMarkerViewResolver.setCache(true);
+        freeMarkerViewResolver.setPrefix("");
+        freeMarkerViewResolver.setSuffix(".ftl");
+        freeMarkerViewResolver.setContentType("text/html;charset=UTF-8");
+        freeMarkerViewResolver.setExposeSpringMacroHelpers(true);
+        freeMarkerViewResolver.setExposeRequestAttributes(true);
+        freeMarkerViewResolver.setExposeSessionAttributes(true);
+        freeMarkerViewResolver.setRequestContextAttribute("rc");
+        return freeMarkerViewResolver;
     }
 
 }

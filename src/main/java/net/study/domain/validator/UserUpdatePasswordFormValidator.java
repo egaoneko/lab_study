@@ -44,8 +44,43 @@ public class UserUpdatePasswordFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         LOGGER.debug("Validating {}", target);
         UserUpdatePasswordForm form = (UserUpdatePasswordForm) target;
+        validateOldPasswordEmpty(errors, form);
+        validatePasswordEmpty(errors, form);
+        validatePasswordRepeatedEmpty(errors, form);
+        validatePasswordLength(errors, form);
+        validatePasswordRepeatedLength(errors, form);
         validateOldPasswords(errors, form);
         validatePasswords(errors, form);
+    }
+
+    private void validateOldPasswordEmpty(Errors errors, UserUpdatePasswordForm form){
+        if (form.getPassword() == null || form.getPassword().equals("")) {
+            errors.reject("oldPassword.empty", "OldPassword is empty");
+        }
+    }
+
+    private void validatePasswordEmpty(Errors errors, UserUpdatePasswordForm form){
+        if (form.getPassword() == null || form.getPassword().equals("")) {
+            errors.reject("password.empty", "Password is empty");
+        }
+    }
+
+    private void validatePasswordRepeatedEmpty(Errors errors, UserUpdatePasswordForm form){
+        if (form.getPasswordRepeated() == null || form.getPasswordRepeated().equals("")) {
+            errors.reject("passwordRepeated.empty", "PasswordRepeated is empty");
+        }
+    }
+
+    private void validatePasswordLength(Errors errors, UserUpdatePasswordForm form){
+        if (form.getPassword().length() < 8) {
+            errors.reject("password.empty", "Password is too short (minimum is 7 characters)");
+        }
+    }
+
+    private void validatePasswordRepeatedLength(Errors errors, UserUpdatePasswordForm form){
+        if (form.getPasswordRepeated().length() < 8) {
+            errors.reject("passwordRepeated.empty", "PasswordRepeated is too short (minimum is 7 characters)");
+        }
     }
 
     private void validateOldPasswords(Errors errors, UserUpdatePasswordForm form) {

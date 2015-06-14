@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
-    @RequestMapping("/user/{id}")
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public ModelAndView getUserPage(@PathVariable Long id) {
         LOGGER.debug("Getting user page for user={}", id);
         return new ModelAndView("user/user", "user", userService.getUserById(id)

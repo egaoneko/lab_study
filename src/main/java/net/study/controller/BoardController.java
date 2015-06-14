@@ -39,7 +39,7 @@ public class BoardController {
     @Autowired
     private BoardRepository boardRepository;
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String boardList(Model model,
                             @RequestParam(value = "p", required = false) Integer requestPage){
         LOGGER.debug("Getting board list page for page number={}", requestPage);
@@ -67,7 +67,7 @@ public class BoardController {
         return "board/list";
     }
 
-    @RequestMapping(value = "/write")
+    @RequestMapping(value = "/write", method = RequestMethod.GET)
     public String boardWrite() throws Exception{
         LOGGER.debug("Getting board write form");
 
@@ -91,7 +91,7 @@ public class BoardController {
         return "redirect:/article/list";
     }
 
-    @RequestMapping(value = "/read/{boardId}")
+    @RequestMapping(value = "/read/{boardId}", method = RequestMethod.GET)
     public String boardRead(@PathVariable("boardId") Long boardId,
                             HttpServletRequest request,
                             Model model){
@@ -112,7 +112,7 @@ public class BoardController {
         return "board/readLayout";
     }
 
-    @RequestMapping(value = "/update/{boardId}")
+    @RequestMapping(value = "/update/{boardId}", method = RequestMethod.GET)
     public String boardUpdate(@ModelAttribute("currentUser")CurrentUser currentUser,
                               @PathVariable("boardId") Long boardId,
                               Model model){

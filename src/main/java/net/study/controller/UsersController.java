@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,7 +37,7 @@ public class UsersController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping("/users")
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String getUsersPage(Model model,
                                      @RequestParam(value = "p", required = false) Integer requestPage) {
         LOGGER.debug("Getting users page");
@@ -55,9 +56,6 @@ public class UsersController {
         Paging paging = new Paging().paging(requestPage, 10, totalCount);
         model.addAttribute("paging", paging);
 
-        /*
-        유저가 없을 때 수행된다.
-         */
         if(totalCount == 0) {
             model.addAttribute("hasUser", false);
         } else {

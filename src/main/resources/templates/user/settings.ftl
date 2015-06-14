@@ -24,17 +24,20 @@
         </@layout.extends>
     </@layout.put>
 
-
     <@layout.put block="contents">
         <section>
             <@spring.bind "form" />
             <#if spring.status.error>
-                <#list spring.status.errorMessages as error>
-                    <div class="alert alert-dismissable alert-danger text-center">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
+                <div class="alert alert-dismissable alert-danger text-center">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <#list spring.status.errorMessages as error>
                         <p>${error}</p>
-                    </div>
-                </#list>
+
+                        <#if error?contains("Old")><#global errorOldPassword=true></#if>
+                        <#if error?contains("Passwords") || error?contains("Password")><#global errorPassword=true></#if>
+                        <#if error?contains("Passwords") || error?contains("PasswordRepeated")><#global errorPasswordRepeated=true></#if>
+                    </#list>
+                </div>
             </#if>
 
             <#if deleteError??>
@@ -42,7 +45,6 @@
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <p>${deleteError}</p>
                 </div>
-
             </#if>
         </section>
 
@@ -56,19 +58,19 @@
 
                     <fieldset>
                         <legend class="text-center">Change Password</legend>
-                        <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Old")>has-error</#if></#list></#if>">
+                        <div class="form-group <#if errorOldPassword??>has-error</#if>">
                             <div class="col-lg-12">
                                 <input type="password" class="form-control" name="oldPassword" id="oldPassword" placeholder="Password" required autofocus>
                             </div>
                         </div>
 
-                        <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Passwords")>has-error</#if></#list></#if>">
+                        <div class="form-group <#if errorPassword??>has-error</#if>">
                             <div class="col-lg-12">
                                 <input type="password" class="form-control" name="password" id="password" placeholder="New Password" required>
                             </div>
                         </div>
 
-                        <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Passwords")>has-error</#if></#list></#if>">
+                        <div class="form-group <#if errorPasswordRepeated??>has-error</#if>">
                             <div class="col-lg-12">
                                 <input type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Repeat Password" required>
                             </div>
@@ -77,7 +79,7 @@
                         <div class="form-group text-center">
                             <div class="col-lg-12">
                                 <button type="submit" class="btn btn-primary">Update Password</button>
-                                <a href="javascript:void(0)" class="help-block">Forgot password?</a>
+                                <a href="/forgot_password/new" class="help-block">Forgot password?</a>
                             </div>
                         </div>
                     </fieldset>

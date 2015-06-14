@@ -27,12 +27,17 @@
         <section>
             <@spring.bind "form" />
             <#if spring.status.error>
-                <#list spring.status.errorMessages as error>
-                    <div class="alert alert-dismissable alert-danger text-center">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
+                <div class="alert alert-dismissable alert-danger text-center">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <#list spring.status.errorMessages as error>
                         <p>${error}</p>
-                    </div>
-                </#list>
+
+                        <#if error?contains("email") || error?contains("Email")><#global errorEmail=true></#if>
+                        <#if error?contains("Name")><#global errorName=true></#if>
+                        <#if error?contains("Passwords") || error?contains("Password")><#global errorPassword=true></#if>
+                        <#if error?contains("Passwords") || error?contains("PasswordRepeated")><#global errorPasswordRepeated=true></#if>
+                    </#list>
+                </div>
             </#if>
         </section>
 
@@ -47,25 +52,25 @@
 
                         <fieldset>
                             <legend class="text-center">Create User</legend>
-                            <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("email")>has-error</#if></#list></#if>">
+                            <div class="form-group <#if errorEmail??>has-error</#if>">
                                 <div class="col-lg-12">
                                     <input type="email" class="form-control" name="email" id="email" placeholder="Email Address" value="${form.email}" required autofocus>
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group <#if errorName??>has-error</#if>">
                                 <div class="col-lg-12">
-                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="${form.name}" required>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" size="100" value="${form.name}" required>
                                 </div>
                             </div>
 
-                            <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Password")>has-error</#if></#list></#if>">
+                            <div class="form-group <#if errorPassword??>has-error</#if>">
                                 <div class="col-lg-12">
                                     <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                                 </div>
                             </div>
 
-                            <div class="form-group <#if spring.status.error><#list spring.status.errorMessages as error><#if error?contains("Password")>has-error</#if></#list></#if>">
+                            <div class="form-group <#if errorPasswordRepeated??>has-error</#if>">
                                 <div class="col-lg-12">
                                     <input type="password" class="form-control" name="passwordRepeated" id="passwordRepeated" placeholder="Repeat Password" required>
                                 </div>

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
@@ -38,8 +41,51 @@ public class UserCreateFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         LOGGER.debug("Validating {}", target);
         UserCreateForm form = (UserCreateForm) target;
+        validateEmailEmpty(errors, form);
+        validateNameEmpty(errors, form);
+        validatePasswordEmpty(errors, form);
+        validatePasswordRepeatedEmpty(errors, form);
+        validatePasswordLength(errors, form);
+        validatePasswordRepeatedLength(errors, form);
         validatePasswords(errors, form);
+        validateEmailAddress(errors, form);
         validateEmail(errors, form);
+    }
+
+    private void validateEmailEmpty(Errors errors, UserCreateForm form){
+        if (form.getEmail() == null || form.getEmail().equals("")) {
+            errors.reject("email.empty", "Email is empty");
+        }
+    }
+
+    private void validateNameEmpty(Errors errors, UserCreateForm form){
+        if (form.getName() == null || form.getName().equals("")) {
+            errors.reject("name.empty", "Name is empty");
+        }
+    }
+
+    private void validatePasswordEmpty(Errors errors, UserCreateForm form){
+        if (form.getPassword() == null || form.getPassword().equals("")) {
+            errors.reject("password.empty", "Password is empty");
+        }
+    }
+
+    private void validatePasswordRepeatedEmpty(Errors errors, UserCreateForm form){
+        if (form.getPasswordRepeated() == null || form.getPasswordRepeated().equals("")) {
+            errors.reject("passwordRepeated.empty", "PasswordRepeated is empty");
+        }
+    }
+
+    private void validatePasswordLength(Errors errors, UserCreateForm form){
+        if (form.getPassword().length() < 8) {
+            errors.reject("password.empty", "Password is too short (minimum is 7 characters)");
+        }
+    }
+
+    private void validatePasswordRepeatedLength(Errors errors, UserCreateForm form){
+        if (form.getPasswordRepeated().length() < 8) {
+            errors.reject("passwordRepeated.empty", "PasswordRepeated is too short (minimum is 7 characters)");
+        }
     }
 
     private void validatePasswords(Errors errors, UserCreateForm form) {
@@ -49,8 +95,22 @@ public class UserCreateFormValidator implements Validator {
     }
 
     private void validateEmail(Errors errors, UserCreateForm form) {
-        if (userService.getUserByEmail(form.getEmail()).isPresent()) {
-            errors.reject("email.exists", "User with this email already exists");
+
+        try {
+            userService.getUserByEmail(form.getEmail()).get();
+        } catch (Exception ex){
+            return;
+        }
+
+        errors.reject("email.exists", "User with this email already exists");
+    }
+
+    private void validateEmailAddress(Errors errors, UserCreateForm form) {
+        try {
+            InternetAddress internetAddress = new InternetAddress(form.getEmail());
+            internetAddress.validate();
+        } catch (AddressException ex){
+            errors.reject("email.no_validate", "Email does not validate");
         }
     }
 }

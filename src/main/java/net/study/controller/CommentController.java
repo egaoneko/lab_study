@@ -55,7 +55,7 @@ public class CommentController {
     @Autowired
     private Utils utils;
 
-    @RequestMapping(value = "/list/{boardId}")
+    @RequestMapping(value = "/list/{boardId}", method = RequestMethod.GET)
     public String commentList(@PathVariable("boardId") Long boardId,
                               @RequestParam(value = "p", required = false) Integer requestPage,
                               Model model){
@@ -110,7 +110,7 @@ public class CommentController {
         return "common/success";
     }
 
-    @RequestMapping(value = "/update/{commentId}")
+    @RequestMapping(value = "/update/{commentId}", method = RequestMethod.GET)
     public String commentUpdate(@ModelAttribute("currentUser")CurrentUser currentUser,
                                 @PathVariable("commentId") Long commentId,
                                 Model model){
@@ -146,7 +146,7 @@ public class CommentController {
         return "common/success";
     }
 
-    @RequestMapping(value = "/reply/{parentCommentId}")
+    @RequestMapping(value = "/reply/{parentCommentId}", method = RequestMethod.GET)
     public String commentReply(@PathVariable("parentCommentId") Long parentCommentId,
                                Model model) throws Exception{
         LOGGER.debug("Getting comment reply form for parent id={}", parentCommentId);
@@ -168,9 +168,6 @@ public class CommentController {
         return "comment/reply";
     }
 
-    /*
-    댓글 답글
-     */
     @RequestMapping(value = "/reply", method = RequestMethod.POST)
     public String commentReply(@ModelAttribute("currentUser")CurrentUser currentUser,
                                @RequestParam("parentCommentId") Long parentCommentId,

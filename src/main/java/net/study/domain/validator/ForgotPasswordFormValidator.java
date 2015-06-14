@@ -1,0 +1,56 @@
+package net.study.domain.validator;
+
+import net.study.domain.form.ForgotPasswordForm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+/**
+ * First Editor : Donghyun Seo (egaoneko@naver.com)
+ * Last Editor  :
+ * Date         : 6/15/15 | 4:11 AM
+ * Description  :
+ * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
+ * version      :
+ */
+
+@Component
+public class ForgotPasswordFormValidator implements Validator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ForgotPasswordFormValidator.class);
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return clazz.equals(ForgotPasswordForm.class);
+    }
+
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        LOGGER.debug("Validating {}", target);
+        ForgotPasswordForm form = (ForgotPasswordForm) target;
+        validatePasswordEmpty(errors, form);
+        validatePasswordRepeatedEmpty(errors, form);
+        validatePasswords(errors, form);
+    }
+
+    private void validatePasswordEmpty(Errors errors, ForgotPasswordForm form){
+        if (form.getPassword() == null || form.getPassword().equals("")) {
+            errors.reject("password.empty", "Password is empty");
+        }
+    }
+
+    private void validatePasswordRepeatedEmpty(Errors errors, ForgotPasswordForm form){
+        if (form.getPasswordRepeated() == null || form.getPasswordRepeated().equals("")) {
+            errors.reject("passwordRepeated.empty", "PasswordRepeated is empty");
+        }
+    }
+
+    private void validatePasswords(Errors errors, ForgotPasswordForm form) {
+        if (!form.getPassword().equals(form.getPasswordRepeated())) {
+            errors.reject("password.no_match", "Passwords do not match");
+        }
+    }
+}
