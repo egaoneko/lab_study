@@ -75,13 +75,13 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping("/login")
     public ModelAndView getLoginPage(@RequestParam Optional<String> error) {
         LOGGER.debug("Getting login page, error={}", error);
         return new ModelAndView("login", "error", error);
     }
 
-    @RequestMapping(value = "/forgot_password/new", method = RequestMethod.GET)
+    @RequestMapping("/forgot_password/new")
     public String forgotPasswordPage(){
         LOGGER.debug("Forgot password page");
         return "forgotPasswordNew";
@@ -112,7 +112,7 @@ public class LoginController {
 
         mailUtils.sendForgotPasswordMail(user, forgotPassword.getKeyHash());
 
-        return new ModelAndView("forgotPasswordNew", "message", "Success");
+        return new ModelAndView("forgotPasswordNew", "message", "Success! Check your email.");
     }
 
     private String validateEmail(String email){
@@ -133,7 +133,7 @@ public class LoginController {
         return null;
     }
 
-    @RequestMapping(value = "/forgot_password/reset/**", method = RequestMethod.GET)
+    @RequestMapping("/forgot_password/reset/**")
     public ModelAndView resetPassword(@RequestParam(value = "k", required = true) String keyHash) {
         LOGGER.debug("Reset password page, keyHash={}", keyHash);
 

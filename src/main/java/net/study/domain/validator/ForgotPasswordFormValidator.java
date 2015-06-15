@@ -33,6 +33,8 @@ public class ForgotPasswordFormValidator implements Validator {
         ForgotPasswordForm form = (ForgotPasswordForm) target;
         validatePasswordEmpty(errors, form);
         validatePasswordRepeatedEmpty(errors, form);
+        validatePasswordLength(errors, form);
+        validatePasswordRepeatedLength(errors, form);
         validatePasswords(errors, form);
     }
 
@@ -45,6 +47,18 @@ public class ForgotPasswordFormValidator implements Validator {
     private void validatePasswordRepeatedEmpty(Errors errors, ForgotPasswordForm form){
         if (form.getPasswordRepeated() == null || form.getPasswordRepeated().equals("")) {
             errors.reject("passwordRepeated.empty", "PasswordRepeated is empty");
+        }
+    }
+
+    private void validatePasswordLength(Errors errors, ForgotPasswordForm form){
+        if (form.getPassword().length() < 7) {
+            errors.reject("password.empty", "Password is too short (minimum is 7 characters)");
+        }
+    }
+
+    private void validatePasswordRepeatedLength(Errors errors, ForgotPasswordForm form){
+        if (form.getPasswordRepeated().length() < 7) {
+            errors.reject("passwordRepeated.empty", "PasswordRepeated is too short (minimum is 7 characters)");
         }
     }
 

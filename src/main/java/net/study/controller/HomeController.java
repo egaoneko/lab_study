@@ -22,7 +22,7 @@ public class HomeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping("/")
     public String getHomePage(@ModelAttribute("currentUser")CurrentUser currentUser) {
         LOGGER.debug("Getting home page");
 

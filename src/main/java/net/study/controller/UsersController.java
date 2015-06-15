@@ -37,7 +37,7 @@ public class UsersController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping("/users")
     public String getUsersPage(Model model,
                                      @RequestParam(value = "p", required = false) Integer requestPage) {
         LOGGER.debug("Getting users page");

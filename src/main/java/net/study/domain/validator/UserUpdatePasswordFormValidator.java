@@ -72,13 +72,13 @@ public class UserUpdatePasswordFormValidator implements Validator {
     }
 
     private void validatePasswordLength(Errors errors, UserUpdatePasswordForm form){
-        if (form.getPassword().length() < 8) {
+        if (form.getPassword().length() < 7) {
             errors.reject("password.empty", "Password is too short (minimum is 7 characters)");
         }
     }
 
     private void validatePasswordRepeatedLength(Errors errors, UserUpdatePasswordForm form){
-        if (form.getPasswordRepeated().length() < 8) {
+        if (form.getPasswordRepeated().length() < 7) {
             errors.reject("passwordRepeated.empty", "PasswordRepeated is too short (minimum is 7 characters)");
         }
     }

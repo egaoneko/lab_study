@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping("/user/{id}")
     public ModelAndView getUserPage(@PathVariable Long id) {
         LOGGER.debug("Getting user page for user={}", id);
         return new ModelAndView("user/user", "user", userService.getUserById(id)
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @RequestMapping(value = "/user/create", method = RequestMethod.GET)
+    @RequestMapping("/user/create")
     public ModelAndView getUserCreatePage() {
         LOGGER.debug("Getting user create form");
         return new ModelAndView("user/create", "form", new UserCreateForm());
@@ -80,7 +80,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "/user/register", method = RequestMethod.GET)
+    @RequestMapping("/user/register")
     public ModelAndView getUserRegisterPage() {
         LOGGER.debug("Getting user register form");
         return new ModelAndView("user/register", "form", new UserCreateForm());

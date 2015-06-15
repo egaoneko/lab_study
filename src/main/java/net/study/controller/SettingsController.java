@@ -50,7 +50,7 @@ public class SettingsController {
         binder.addValidators(userUpdatePasswordFormValidator);
     }
 
-    @RequestMapping(value = "/settings/admin", method = RequestMethod.GET)
+    @RequestMapping("/settings/admin")
     public ModelAndView getSettingsAdmin() {
         LOGGER.debug("Getting settings admin form");
         return new ModelAndView("user/settings", "form", new UserUpdatePasswordForm());

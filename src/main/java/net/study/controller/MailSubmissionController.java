@@ -28,7 +28,7 @@ public class MailSubmissionController {
         this.javaMailSender = javaMailSender;
     }
 
-    @RequestMapping(value = "/mail", method = RequestMethod.GET)
+    @RequestMapping("/mail")
     @ResponseStatus(HttpStatus.CREATED)
     SimpleMailMessage send() {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
