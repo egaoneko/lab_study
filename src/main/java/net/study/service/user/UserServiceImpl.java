@@ -1,18 +1,25 @@
 package net.study.service.user;
 
+import net.study.domain.File;
 import net.study.domain.User;
 import net.study.domain.form.UserCreateForm;
 import net.study.domain.form.UserUpdatePasswordForm;
+import net.study.repository.FileRepository;
 import net.study.repository.UserRepository;
+import net.study.util.identicon.IdenticonGeneratorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -25,13 +32,21 @@ import java.util.Optional;
  */
 
 @Service
+@PropertySource("classpath:file.properties")
 public class UserServiceImpl implements UserService {
+
+    @Value("${file.identicon.filePath}")
+    private String filePath;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
+    private final IdenticonGeneratorUtil identiconGeneratorUtil;
+    private final FileRepository fileRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(FileRepository fileRepository, IdenticonGeneratorUtil identiconGeneratorUtil, UserRepository userRepository) {
+        this.fileRepository = fileRepository;
+        this.identiconGeneratorUtil = identiconGeneratorUtil;
         this.userRepository = userRepository;
     }
 
@@ -54,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(UserCreateForm form) {
+    public User create(UserCreateForm form){
         User user = new User();
         user.setEmail(form.getEmail());
         user.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
@@ -62,7 +77,26 @@ public class UserServiceImpl implements UserService {
         user.setName(form.getName());
         user.setCreatedDate(new Date());
         user.setLastDate(new Date());
-        return userRepository.save(user);
+
+        Map<String, String> fileMap;
+        try{
+            fileMap = identiconGeneratorUtil.generator(form.getEmail());
+        } catch (IOException e){
+            return userRepository.save(user);
+        }
+
+        java.io.File avatar = new java.io.File(filePath + fileMap.get("realPath"));
+
+        File file = new File(fileMap.get("fileName"), fileMap.get("realPath"), avatar.length(), 0);
+        file = fileRepository.save(file);
+
+        user.setFile(file);
+        user=userRepository.save(user);
+
+        file.setUser(user);
+        fileRepository.save(file);
+
+        return user;
     }
 
     @Override

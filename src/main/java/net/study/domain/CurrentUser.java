@@ -37,6 +37,8 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
         return user.getName();
     }
 
+    public File getFile(){ return user.getFile();}
+
     @Override
     public String toString() {
         return "CurrentUser{" +

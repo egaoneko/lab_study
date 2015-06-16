@@ -31,3 +31,5 @@ gradlew
 gradlew.bat
 gradle
 logs
+
+src/main/resources/static/img/avatar

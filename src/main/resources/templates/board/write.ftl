@@ -41,7 +41,7 @@
 
                             <div class="form-group">
                                 <label for="content" class="col-lg-2 control-label">Content</label>
-                                <div class="col-lg-12">
+                                <div class="col-lg-10">
                                     <textarea class="form-control" rows="20" name="content" id="content" placeholder="Write your content" required></textarea>
                                 </div>
                             </div>

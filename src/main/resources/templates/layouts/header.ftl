@@ -50,7 +50,7 @@
                 <#if !currentUser??><li><a href="/login">Sign In</a></li>
                 <#else>
                     <li class="dropdown">
-                        <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><img src="/img/user.png" style="width:20px; height:20px;" alt="icon"><b class="caret"></b></a>
+                        <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<#if currentUser.file??>${currentUser.file.realPath}<#else>/img/user.png</#if>" style="width:20px; height:20px;" alt="icon"><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><p class="text-muted text-center">Signed in as ${currentUser.name}</p></li>
                             <li><a href="/user/${currentUser.id?c}">Profile</a></li>

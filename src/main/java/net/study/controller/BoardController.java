@@ -85,6 +85,7 @@ public class BoardController {
         board.setContent(content);
         board.setPostingDate(new Date());
         board.setUser(currentUser.getUser());
+        board.setReadCount(0);
 
         boardRepository.save(board);
 

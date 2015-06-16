@@ -18,6 +18,8 @@ public class QUser extends EntityPathBase<User> {
 
     private static final long serialVersionUID = 799046687L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QUser user = new QUser("user");
 
     public final ListPath<Board, QBoard> boards = this.<Board, QBoard>createList("boards", Board.class, QBoard.class, PathInits.DIRECT2);
@@ -27,6 +29,8 @@ public class QUser extends EntityPathBase<User> {
     public final DateTimePath<java.util.Date> createdDate = createDateTime("createdDate", java.util.Date.class);
 
     public final StringPath email = createString("email");
+
+    public final QFile file;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -39,15 +43,24 @@ public class QUser extends EntityPathBase<User> {
     public final EnumPath<net.study.domain.enums.Role> role = createEnum("role", net.study.domain.enums.Role.class);
 
     public QUser(String variable) {
-        super(User.class, forVariable(variable));
+        this(User.class, forVariable(variable), INITS);
     }
 
     public QUser(Path<? extends User> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
     }
 
     public QUser(PathMetadata<?> metadata) {
-        super(User.class, metadata);
+        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+    }
+
+    public QUser(PathMetadata<?> metadata, PathInits inits) {
+        this(User.class, metadata, inits);
+    }
+
+    public QUser(Class<? extends User> type, PathMetadata<?> metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.file = inits.isInitialized("file") ? new QFile(forProperty("file"), inits.get("file")) : null;
     }
 
 }

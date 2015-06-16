@@ -87,7 +87,7 @@ public class UserController {
         return new ModelAndView("user/register", "form", new UserCreateForm());
     }
 
-    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String handleUserRegisterForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
         LOGGER.debug("Processing user register form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {

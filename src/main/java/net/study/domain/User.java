@@ -58,6 +58,10 @@ public class User {
     )
     private List<Comment> comments;
 
+    @OneToOne
+    private File file;
+
+
     public Long getId() {
         return id;
     }
@@ -128,6 +132,14 @@ public class User {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
     @Override

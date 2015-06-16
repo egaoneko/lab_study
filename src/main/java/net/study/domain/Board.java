@@ -32,7 +32,7 @@ public class Board {
     @Column(nullable = false)
     private Date postingDate;
 
-    @Column(nullable = false, columnDefinition = "int default 0")
+    @Column(nullable = false)
     private Integer readCount;
 
     @OneToMany(

@@ -197,4 +197,12 @@ public class Utils {
 
         return new BCryptPasswordEncoder().encode(str + randomString);
     }
+
+    /*
+    File save helper generate fileName
+     */
+    public String fileNameHelper(){
+        long currentTime = System.currentTimeMillis();
+        return Long.toString(currentTime) + "_" + randomString(32);
+    }
 }
