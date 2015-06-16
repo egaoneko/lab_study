@@ -29,6 +29,7 @@ import javax.validation.Valid;
  */
 
 @Controller
+@RequestMapping("/settings")
 public class SettingsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingsController.class);
@@ -50,13 +51,13 @@ public class SettingsController {
         binder.addValidators(userUpdatePasswordFormValidator);
     }
 
-    @RequestMapping("/settings/admin")
+    @RequestMapping("/admin")
     public ModelAndView getSettingsAdmin() {
         LOGGER.debug("Getting settings admin form");
         return new ModelAndView("user/settings", "form", new UserUpdatePasswordForm());
     }
 
-    @RequestMapping(value = "/settings/password", method = RequestMethod.POST)
+    @RequestMapping(value = "/password", method = RequestMethod.POST)
     public String handleSettingsPassword(@Valid @ModelAttribute("form") UserUpdatePasswordForm form, BindingResult bindingResult) {
         LOGGER.debug("Processing user register form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -70,7 +71,7 @@ public class SettingsController {
         return "redirect:/settings/admin";
     }
 
-    @RequestMapping(value = "/settings/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ModelAndView handleSettingsDelete(@ModelAttribute("currentUser")CurrentUser currentUser,
                                              @RequestParam(value = "password", required = true) String password){
 

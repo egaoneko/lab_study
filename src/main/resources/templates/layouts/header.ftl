@@ -12,7 +12,7 @@
 
 <header>
     <div class="navbar navbar-default">
-        <div class="navbar-header">
+        <div class="navbar-header col-lg-offset-1 col-md-offset-1">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -40,6 +40,11 @@
             <form class="navbar-form navbar-left">
                 <input type="text" class="form-control col-lg-8" placeholder="Search">
             </form>
+
+            <!-- For empty space -->
+            <div class="nav navbar-nav navbar-right col-lg-1 col-md-1">
+            </div>
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="javascript:void(0)">Link</a></li>
                 <#if !currentUser??><li><a href="/login">Sign In</a></li>

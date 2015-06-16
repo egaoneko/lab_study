@@ -1,9 +1,12 @@
 package net.study.domain.form;
 
+import net.study.domain.Book;
 import net.study.domain.enums.*;
+import net.study.repository.BookRepository;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -50,6 +53,10 @@ public class StudyCreateForm {
 
     @NotNull
     private Status status = Status.OPEN;
+
+    private Set<Long> books;
+
+    private Set<Book> bookSet;
 
     public Long getId() {
         return id;
@@ -169,6 +176,22 @@ public class StudyCreateForm {
 
     public Status[] getStatusList(){
         return Status.values();
+    }
+
+    public Set<Long> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Long> books) {
+        this.books = books;
+    }
+
+    public Set<Book> getBookSet() {
+        return bookSet;
+    }
+
+    public void setBookSet(Set<Book> bookSet) {
+        this.bookSet = bookSet;
     }
 
     public String toString() {

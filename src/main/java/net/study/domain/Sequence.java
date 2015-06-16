@@ -22,7 +22,7 @@ public class Sequence {
     private String name;
 
     @Column(nullable = false)
-    private long nextValue;
+    private Long nextValue;
 
     public Sequence() {
     }
@@ -35,11 +35,11 @@ public class Sequence {
         this.name = name;
     }
 
-    public long getNextValue() {
+    public Long getNextValue() {
         return nextValue;
     }
 
-    public void setNextValue(long nextValue) {
+    public void setNextValue(Long nextValue) {
         this.nextValue = nextValue;
     }
 }

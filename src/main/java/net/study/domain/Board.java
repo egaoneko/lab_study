@@ -33,7 +33,7 @@ public class Board {
     private Date postingDate;
 
     @Column(nullable = false, columnDefinition = "int default 0")
-    private int readCount;
+    private Integer readCount;
 
     @OneToMany(
             targetEntity = Comment.class,
@@ -85,11 +85,11 @@ public class Board {
         this.postingDate = postingDate;
     }
 
-    public int getReadCount() {
+    public Integer getReadCount() {
         return readCount;
     }
 
-    public void setReadCount(int readCount) {
+    public void setReadCount(Integer readCount) {
         this.readCount = readCount;
     }
 
@@ -110,8 +110,8 @@ public class Board {
     }
 
     /*
-        Login User Check
-         */
+    Login User Check
+     */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;

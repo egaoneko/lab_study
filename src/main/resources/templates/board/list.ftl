@@ -32,7 +32,7 @@
 
             <br>
 
-            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 panel panel-default">
 
                 <legend class="text-center">Article List</legend>
 
@@ -113,7 +113,6 @@
                             <div id="read" class="modal-body"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -125,19 +124,19 @@
     </@layout.put>
 
     <@layout.put block="script">
-    <script src="/js/comment.js"></script>
-    <script type="text/javascript">
+        <script src="/js/comment.js"></script>
+        <script type="text/javascript">
 
-        contextPath = "${rc.getContextPath()}";
+            contextPath = "${rc.getContextPath()}";
 
-        function load_page(id) {
+            function load_page(id) {
 
-            // Loading 0.5 seconds
-            setTimeout(function() {
+                // Loading 0.5 seconds
+                setTimeout(function() {
 
-                $('#read').load(contextPath + "/article/read/"+id)
-            }, 500);
-        }
-    </script>
+                    $('#read').load(contextPath + "/article/read/"+id)
+                }, 500);
+            }
+        </script>
     </@layout.put>
 </@layout.extends>

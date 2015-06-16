@@ -40,7 +40,7 @@
         </section>
 
         <section class="vertical-center">
-            <div class="col-xs-9 col-sm-6 col-md-5 col-lg-4 well">
+            <div class="col-xs-9 col-sm-6 col-md-5 col-lg-4 panel panel-default">
                 <section>
                     <form role="form" action="" method="post" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -4,6 +4,7 @@ import net.study.domain.CurrentUser;
 import net.study.domain.Study;
 import net.study.domain.form.StudyCreateForm;
 import net.study.domain.validator.StudyCreateFormValidator;
+import net.study.repository.BookRepository;
 import net.study.repository.StudyRepository;
 import net.study.service.study.StudyService;
 import net.study.util.Paging;
@@ -22,8 +23,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -35,12 +38,15 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/study")
+@RequestMapping("/study")
 public class StudyController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StudyController.class);
 
     private final int PAGE_PER_SIZE = 10;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Autowired
     private StudyRepository studyRepository;
@@ -94,6 +100,13 @@ public class StudyController {
     public String studyWrite(@Valid @ModelAttribute("form") StudyCreateForm form, BindingResult bindingResult){
         LOGGER.debug("Processing study create form={}, bindingResult={}", form, bindingResult);
 
+        /*
+        For remaining books when error occurred.
+         */
+        if(form.getBooks() != null){
+            form.setBookSet(form.getBooks().stream().map(bookRepository::findOne).collect(Collectors.toSet()));
+        }
+
         if (bindingResult.hasErrors()) {
             // failed validation
             return "study/write";
@@ -111,13 +124,20 @@ public class StudyController {
 
     @RequestMapping("/read/{studyId}")
     public String studyRead(@PathVariable("studyId") Long studyId,
+                            HttpServletRequest request,
                             Model model){
         LOGGER.debug("Getting study read page for id={}", studyId);
 
         Study study = studyRepository.findOne(studyId);
         model.addAttribute("study", study);
 
-        return "study/read";
+        String referer = request.getHeader("Referer");
+        LOGGER.debug("Getting Referer = {}", referer);
+        if(referer.contains("/study/list")){
+            return "study/read";
+        }
+
+        return "study/readLayout";
     }
 
     @RequestMapping("/update/{studyId}")
@@ -141,8 +161,15 @@ public class StudyController {
 
         Study study = studyRepository.findOne(form.getId());
 
+        /*
+        For remaining books when error occurred.
+         */
         if(!study.checkUser(currentUser.getUser())){
             return "redirect:/study/read/"+form.getId();
+        }
+
+        if(form.getBooks() != null){
+            form.setBookSet(form.getBooks().stream().map(bookRepository::findOne).collect(Collectors.toSet()));
         }
 
         if (bindingResult.hasErrors()) {

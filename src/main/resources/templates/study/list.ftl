@@ -27,7 +27,7 @@
 
             <br>
 
-            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 panel panel-default">
 
                 <legend class="text-center">Study List</legend>
 
@@ -53,7 +53,7 @@
                             <tr>
                                 <td>${list.id?c}</td>
                                 <td>
-                                    <a href="read/${list.id?c}?p=${paging.requestPage?c}">
+                                    <a href="javascript:void(0)" onclick="load_page(${list.id?c})" data-toggle="modal" data-target="#read-dialog">
                                     ${list.title}
                                     </a>
                                 </td>
@@ -96,6 +96,18 @@
                 </div>
             </div>
         </section>
+
+        <section>
+            <div>
+                <div id="read-dialog" class="modal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div id="read" class="modal-body"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </@layout.put>
 
     <@layout.put block="footer" type="replace">
@@ -104,5 +116,18 @@
     </@layout.put>
 
     <@layout.put block="script">
+        <script type="text/javascript">
+
+            contextPath = "${rc.getContextPath()}";
+
+            function load_page(id) {
+
+                // Loading 0.5 seconds
+                setTimeout(function() {
+
+                    $('#read').load(contextPath + "/study/read/"+id)
+                }, 500);
+            }
+        </script>
     </@layout.put>
 </@layout.extends>

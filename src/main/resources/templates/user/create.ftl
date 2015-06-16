@@ -45,7 +45,7 @@
 
             <br>
 
-            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 panel panel-default">
                 <section>
                     <form role="form" action="" method="post" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

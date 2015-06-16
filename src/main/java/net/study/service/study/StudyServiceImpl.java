@@ -1,7 +1,9 @@
 package net.study.service.study;
 
+import net.study.domain.Book;
 import net.study.domain.Study;
 import net.study.domain.form.StudyCreateForm;
+import net.study.repository.BookRepository;
 import net.study.repository.StudyRepository;
 import net.study.repository.UserRepository;
 import org.slf4j.Logger;
@@ -9,7 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -26,11 +29,13 @@ public class StudyServiceImpl implements StudyService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StudyServiceImpl.class);
     private final StudyRepository studyRepository;
     private final UserRepository userRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public StudyServiceImpl(StudyRepository studyRepository, UserRepository userRepository) {
-        this.studyRepository = studyRepository;
+    public StudyServiceImpl(BookRepository bookRepository, UserRepository userRepository, StudyRepository studyRepository) {
+        this.bookRepository = bookRepository;
         this.userRepository = userRepository;
+        this.studyRepository = studyRepository;
     }
 
     @Override
@@ -49,6 +54,14 @@ public class StudyServiceImpl implements StudyService {
         study.setParticipant(form.getParticipant());
         study.setStatus(form.getStatus());
 
+        Set<Book> bookSet;
+        if(form.getBooks() != null) {
+            bookSet = form.getBooks().stream().map(bookRepository::findOne).collect(Collectors.toSet());
+            study.setBookSet(bookSet);
+        } else {
+            bookSet = new HashSet<>();
+        }
+
         return studyRepository.save(study);
     }
 
@@ -66,6 +79,14 @@ public class StudyServiceImpl implements StudyService {
         study.setPrice(form.getPrice());
         study.setParticipant(form.getParticipant());
         study.setStatus(form.getStatus());
+
+        Set<Book> bookSet;
+        if(form.getBooks() != null) {
+            bookSet = form.getBooks().stream().map(bookRepository::findOne).collect(Collectors.toSet());
+            study.setBookSet(bookSet);
+        } else {
+            bookSet = new HashSet<>();
+        }
 
         return studyRepository.save(study);
     }
@@ -86,6 +107,7 @@ public class StudyServiceImpl implements StudyService {
         studyCreateForm.setPrice(study.getPrice());
         studyCreateForm.setParticipant(study.getParticipant());
         studyCreateForm.setStatus(study.getStatus());
+        studyCreateForm.setBookSet(study.getBookSet());
 
         return studyCreateForm;
     }

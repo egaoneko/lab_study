@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/article")
+@RequestMapping("/article")
 public class BoardController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
@@ -104,7 +104,7 @@ public class BoardController {
         model.addAttribute("board", board);
 
         String referer = request.getHeader("Referer");
-        LOGGER.debug("Getting Referer = {}, {}", referer);
+        LOGGER.debug("Getting Referer = {}", referer);
         if(referer.contains("/article/list")){
             return "board/read";
         }

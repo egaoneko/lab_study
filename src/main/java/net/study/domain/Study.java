@@ -5,6 +5,7 @@ import net.study.domain.enums.*;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -58,14 +59,20 @@ public class Study {
     private Way way;
 
     @Column(nullable = false, columnDefinition = "int default 0")
-    private int price;
+    private Integer price;
 
     @Column(nullable = false, columnDefinition = "int default 1")
-    private int participant;
+    private Integer participant;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @ManyToMany
+    @JoinTable(name = "STUDY_BOOK",
+            joinColumns = @JoinColumn(name = "STUDY_ID_FRK"),
+            inverseJoinColumns = @JoinColumn(name = "BOOK_ID_FRK"))
+    private Set<Book> bookSet;
 
     public Study() {
     }
@@ -150,19 +157,19 @@ public class Study {
         this.way = way;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public int getParticipant() {
+    public Integer getParticipant() {
         return participant;
     }
 
-    public void setParticipant(int participant) {
+    public void setParticipant(Integer participant) {
         this.participant = participant;
     }
 
@@ -174,9 +181,17 @@ public class Study {
         this.status = status;
     }
 
+    public Set<Book> getBookSet() {
+        return bookSet;
+    }
+
+    public void setBookSet(Set<Book> bookSet) {
+        this.bookSet = bookSet;
+    }
+
     /*
-            Login User Check
-             */
+                Login User Check
+                 */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;

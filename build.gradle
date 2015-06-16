@@ -71,6 +71,15 @@ dependencies {
     compile 'javax.mail:mail:1.4.1'
     compile 'org.subethamail:subethasmtp-wiser:1.2'
 
+    // XML to Json
+    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-beanutils:commons-beanutils:1.8.3'
+    compile 'commons-collections:commons-collections:3.2.1'
+    compile 'commons-logging:commons-logging:1.1.1'
+    compile 'net.sf.ezmorph:ezmorph:1.0.6'
+    compile 'xom:xom:1.2.5'
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
     testCompile 'org.subethamail:subethasmtp:3.1.7'

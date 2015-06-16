@@ -27,6 +27,7 @@ import java.util.NoSuchElementException;
  */
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -45,7 +46,7 @@ public class UserController {
     }
 
     @PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
-    @RequestMapping("/user/{id}")
+    @RequestMapping("/{id}")
     public ModelAndView getUserPage(@PathVariable Long id) {
         LOGGER.debug("Getting user page for user={}", id);
         return new ModelAndView("user/user", "user", userService.getUserById(id)
@@ -53,14 +54,14 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @RequestMapping("/user/create")
+    @RequestMapping("/create")
     public ModelAndView getUserCreatePage() {
         LOGGER.debug("Getting user create form");
         return new ModelAndView("user/create", "form", new UserCreateForm());
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @RequestMapping(value = "/user/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -80,7 +81,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping("/user/register")
+    @RequestMapping("/register")
     public ModelAndView getUserRegisterPage() {
         LOGGER.debug("Getting user register form");
         return new ModelAndView("user/register", "form", new UserCreateForm());

@@ -10,88 +10,104 @@
 <#-- @ftlvariable name="study" type="net.study.domain.Study" -->
 <#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
 <#-- @ftlvariable name="rc" type="javax.servlet.http.HttpServletRequest" -->
+<#-- @ftlvariable name="currentUser" type="net.study.domain.CurrentUser" -->
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <title>Study Read</title>
-</head>
-<body>
-    <table>
-        <tr>
-            <td>Title</td>
-            <td>${study.title}</td>
-        </tr>
-        <tr>
-            <td>Author</td>
-            <td>${study.user.getName()}</td>
-        </tr>
-        <tr>
-            <td>Posting Date</td>
-            <td>${study.getDifferentTime()}</td>
-        </tr>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1>${study.title}</h1><h4 class="text-right">${study.getDifferentTime()}</h4>
+    </div>
+    <div class="panel-body">
 
-        <tr>
-            <td>Category</td>
-            <td>${study.category}</td>
-        </tr>
+        <table class="table table-striped table-hover ">
+            <tbody>
+                <tr>
+                    <th>Category</th>
+                    <td><span class="label label-default">${study.category}</span></td>
+                </tr>
+                <tr>
+                    <th>Area</th>
+                    <td><span class="label label-default">${study.area}</span></td>
+                </tr>
+                <tr>
+                    <th>Charge</th>
+                    <td><span class="label label-default">${study.charge}</span></td>
+                </tr>
+                <tr>
+                    <th>On-Off Line</th>
+                    <td><span class="label label-default">${study.onOffLine}</span></td>
+                </tr>
+                <tr>
+                    <th>Way</th>
+                    <td><span class="label label-default">${study.way}</span></td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td><span class="label label-default">${study.price?c}</span></td>
+                </tr>
+                <tr>
+                    <th>Participant</th>
+                    <td><span class="label label-default">${study.participant?c}</span></td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td><span class="label label-default">${study.status}</span></td>
+                </tr>
+            </tbody>
+        </table>
 
-        <tr>
-            <td>Area</td>
-            <td>${study.area}</td>
-        </tr>
+        <table class="table table-striped table-hover">
+            <caption>Book</caption>
+            <colgroup>
+                <col width="10%">
+                <col width="30%">
+                <col width="20%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">Cover</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Publisher</th>
+                    <th scope="col">Publish Date</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+                <#if study.bookSet?has_content>
+                    <#list study.bookSet as book>
+                        <tr id="book_${book.id}">
+                            <td><img src="${book.image}"  width="50px" height="70px" /></td>
+                            <td>${book.title}</td>
+                            <td>${book.author}</td>
+                            <td>${book.publisher}</td>
+                            <td>${book.pubdate}</td>
+                            <td>${book.price}</td>
+                        </tr>
+                    </#list>
+                <#else>
+                    <tr class="__oldlist" style="">
+                        <td colspan="6">Can not found.</td>
+                    </tr>
+                </#if>
+            </tbody>
+        </table>
 
-        <tr>
-            <td>Charge</td>
-            <td>${study.charge}</td>
-        </tr>
+        <hr>
 
-        <tr>
-            <td>On-Off Line</td>
-            <td>${study.onOffLine}</td>
-        </tr>
+        <h3>${study.content}</h3>
 
-        <tr>
-            <td>Way</td>
-            <td>${study.way}</td>
-        </tr>
-
-        <tr>
-            <td>Price</td>
-            <td>${study.price?c}</td>
-        </tr>
-
-        <tr>
-            <td>Participant</td>
-            <td>${study.participant?c}</td>
-        </tr>
-
-        <tr>
-            <td>Status</td>
-            <td>${study.status}</td>
-        </tr>
-
-        <tr>
-            <td>Content</td>
-            <td>${study.content}</td>
-        </tr>
-
-        <tr>
-            <td colspan="2">
-                <input type="button" onclick="location.href='/study/list'" value="List"/>
-                <input type="button" onclick="location.href='/study/update/${study.id?c}'" value="Update"/>
+        <#if study.checkUser(currentUser.user)>
+            <div class="text-right">
+                <input type="button" class="btn btn-info" onclick="location.href='/study/update/${study.id?c}'" value="Update"/>
                 <form action="/study/delete" method="post" style="display: inline;">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="hidden" name="studyId" value="${study.id?c}"/>
-                <input type="submit" value="Delete" >
+                    <input type="submit" class="btn btn-danger" value="Delete" >
                 </form>
-
-            </td>
-        </tr>
-    </table>
-
-    <!-- For Reply -->
-    <div id="reply"></div>
-
-</body>
-</html>
+            </div>
+        </#if>
+    </div>
+</div>

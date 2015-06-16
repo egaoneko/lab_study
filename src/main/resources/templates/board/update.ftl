@@ -25,7 +25,7 @@
 
             <br>
 
-            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 well">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 panel panel-default">
                 <section>
                     <form role="form" action="" method="post" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -34,14 +34,16 @@
                             <legend class="text-center">Article Update</legend>
 
                             <div class="form-group">
-                                <div class="col-lg-12">
+                                <label for="title" class="col-lg-2 control-label">Title</label>
+                                <div class="col-lg-10">
                                     <input type="text" class="form-control" name="title" id="title" placeholder="Title" value="${board.title}" required autofocus>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-12">
-                                    <textarea class="form-control" rows="20" name="content" id="content" required>${board.content}</textarea>
+                                <label for="content" class="col-lg-2 control-label">Content</label>
+                                <div class="col-lg-10">
+                                    <textarea class="form-control" rows="20" name="content" id="content" placeholder="Write your content" required>${board.content}</textarea>
                                 </div>
                             </div>
 

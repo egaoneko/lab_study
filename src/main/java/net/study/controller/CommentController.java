@@ -34,7 +34,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/comment")
+@RequestMapping("/comment")
 public class CommentController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CommentController.class);
 
