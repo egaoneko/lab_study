@@ -1,15 +1,26 @@
 package net.study.util;
 
+import net.study.domain.Assets;
 import net.study.domain.Reply;
+import net.study.domain.User;
 import net.study.error.CannotReplyException;
 import net.study.error.LastChildAlreadyExistsException;
 import net.study.error.NotFoundException;
+import net.study.repository.AssetsRepository;
+import net.study.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
@@ -25,9 +36,25 @@ import java.util.Random;
  */
 
 @Component
+@PropertySource("classpath:file.properties")
 public class Utils {
 
+    @Value("${file.identicon.filePath}")
+    private String filePath;
+
+    @Value("${file.identicon.realPath}")
+    private String path;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
+
+    @Autowired
+    private ImageValidator imageValidator;
+
+    @Autowired
+    private AssetsRepository assetsRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     /*
     Check Parent
@@ -204,5 +231,61 @@ public class Utils {
     public String fileNameHelper(){
         long currentTime = System.currentTimeMillis();
         return Long.toString(currentTime) + "_" + randomString(32);
+    }
+
+    /*
+    File Remove helper
+     */
+    public void fileRemoveHelper(String realPath){
+
+        File file = new File(filePath + realPath);
+        file.delete();
+    }
+
+    public Assets profileSaveHelper(MultipartFile file, User user){
+        LOGGER.debug("Avatar save helper name={}, validated={}", file.getOriginalFilename(), imageValidator.validate(file.getOriginalFilename()));
+
+        Assets assets = fileSaveHelper(file, user);
+
+        if(assets != null) {
+            Assets oldAsset = user.getAssets();
+            fileRemoveHelper(oldAsset.getRealPath());
+            user.setAssets(assets);
+            userRepository.save(user);
+            assetsRepository.delete(oldAsset);
+            return assets;
+        }
+
+        return null;
+    }
+
+    public Assets fileSaveHelper(MultipartFile file, User user){
+        LOGGER.debug("File save helper name={}, validated={}", file.getOriginalFilename(), imageValidator.validate(file.getOriginalFilename()));
+
+        if (imageValidator.validate(file.getOriginalFilename())) {
+            String realPath = path + fileNameHelper();
+
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath + realPath)));
+                stream.write(bytes);
+                stream.close();
+
+                Assets assets = new Assets();
+                assets.setFileName(file.getOriginalFilename());
+                assets.setRealPath(realPath);
+                assets.setUser(user);
+                assets.setFileSize(new Long(bytes.length));
+                assets.setDownloadCount(0);
+
+                assetsRepository.save(assets);
+
+                return assets;
+            } catch (Exception e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

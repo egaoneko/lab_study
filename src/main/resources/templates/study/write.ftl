@@ -16,7 +16,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-        <title>Study/Study/Write</title>
+        <title>${myApp.name}/Study/Write</title>
 
         <meta name="_csrf" content="${_csrf.token}"/>
         <!-- default header name is X-CSRF-TOKEN -->

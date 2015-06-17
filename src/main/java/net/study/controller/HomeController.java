@@ -3,6 +3,7 @@ package net.study.controller;
 import net.study.domain.CurrentUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 
 @Controller
-public class HomeController {
+public class HomeController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
@@ -33,5 +34,28 @@ public class HomeController {
         }
     }
 
+    @RequestMapping(value = "/400")
+    public String error400() {
+        LOGGER.debug("Getting error page");
+        return "error/400";
+    }
+
+    @RequestMapping(value = "/403")
+    public String error403() {
+        LOGGER.debug("Getting error page");
+        return "error/403";
+    }
+
+    @RequestMapping(value = "/404")
+    public String error404() {
+        LOGGER.debug("Getting error page");
+        return "error/404";
+    }
+
+    @RequestMapping(value = "/500")
+    public String error500() {
+        LOGGER.debug("Getting error page");
+        return "error/500";
+    }
 }
 

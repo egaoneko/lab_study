@@ -12,7 +12,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-        <title>Study/Article/Update</title>
+        <title>${myApp.name}/Article/Update</title>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">

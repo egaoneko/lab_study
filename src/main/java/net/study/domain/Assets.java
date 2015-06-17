@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class File {
+public class Assets {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,17 +34,17 @@ public class File {
     @OneToOne
     User user;
 
-    public File() {
+    public Assets() {
     }
 
-    public File(String fileName, String realPath, Long fileSize, Integer downloadCount) {
+    public Assets(String fileName, String realPath, Long fileSize, Integer downloadCount) {
         this.fileName = fileName;
         this.realPath = realPath;
         this.fileSize = fileSize;
         this.downloadCount = downloadCount;
     }
 
-    public File(String fileName, String realPath, Long fileSize, Integer downloadCount, User user) {
+    public Assets(String fileName, String realPath, Long fileSize, Integer downloadCount, User user) {
         this.fileName = fileName;
         this.realPath = realPath;
         this.fileSize = fileSize;

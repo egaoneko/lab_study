@@ -12,7 +12,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-    <title>Study/Sign In</title>
+    <title>${myApp.name}/Sign In</title>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">

@@ -1,6 +1,7 @@
 package net.study.util.identicon;
 
 import net.study.Application;
+import net.study.util.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -36,6 +37,9 @@ public class IdenticonGeneratorUtilTest {
     @Autowired
     IdenticonGeneratorUtil identiconGeneratorUtil;
 
+    @Autowired
+    Utils utils;
+
     @Test
     public void generate() throws Exception {
         Map<String, String> map;
@@ -44,6 +48,7 @@ public class IdenticonGeneratorUtilTest {
             map = identiconGeneratorUtil.generator(email);
             LOGGER.debug("Generate Identicon, realPath={}, fileName={}", map.get("realPath"), map.get("fileName"));
 
+            utils.fileRemoveHelper(map.get("realPath"));
         }
     }
 }

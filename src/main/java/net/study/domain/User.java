@@ -59,7 +59,7 @@ public class User {
     private List<Comment> comments;
 
     @OneToOne
-    private File file;
+    private Assets assets;
 
 
     public Long getId() {
@@ -134,12 +134,12 @@ public class User {
         this.comments = comments;
     }
 
-    public File getFile() {
-        return file;
+    public Assets getAssets() {
+        return assets;
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    public void setAssets(Assets assets) {
+        this.assets = assets;
     }
 
     @Override

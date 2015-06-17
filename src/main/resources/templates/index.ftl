@@ -9,7 +9,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head" type="replace">
-        <title>Study</title>
+        <title>${myApp.name}</title>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

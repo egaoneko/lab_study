@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Study</a>
+            <a class="navbar-brand" href="/">${myApp.name}</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
@@ -50,7 +50,7 @@
                 <#if !currentUser??><li><a href="/login">Sign In</a></li>
                 <#else>
                     <li class="dropdown">
-                        <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<#if currentUser.file??>${currentUser.file.realPath}<#else>/img/user.png</#if>" style="width:20px; height:20px;" alt="icon"><b class="caret"></b></a>
+                        <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<#if currentUser.assets??>${currentUser.assets.realPath}<#else>/img/user.png</#if>" style="width:20px; height:20px;" alt="icon"><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><p class="text-muted text-center">Signed in as ${currentUser.name}</p></li>
                             <li><a href="/user/${currentUser.id?c}">Profile</a></li>

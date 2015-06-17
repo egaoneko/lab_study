@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="#default">Start Bootstrap</a>
+            <a class="navbar-brand page-scroll" href="#default">${myApp.name}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,12 +52,12 @@
 <header>
     <div class="header-content">
         <div class="header-content-inner">
-            <h1>Your Favorite Source of Free Bootstrap Themes</h1>
+            <h1>Easy to Find<br>Easy to Meet up</h1>
             <hr>
-            <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
-            <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+            <p>EFEM can help you find and meet up studies! Just sign up now!</p>
+            <a href="/user/register" class="btn btn-primary btn-xl page-scroll">Sign Up</a>
             <br>
-            <a href="/user/register" class="btn btn-primary-default btn-xl page-scroll">Sign Up</a>
+            <a href="#about" class="btn btn-primary-default btn-xl page-scroll">Find Out More</a>
         </div>
     </div>
 </header>

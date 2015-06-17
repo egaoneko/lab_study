@@ -4,6 +4,7 @@ import net.study.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -22,12 +23,12 @@ import java.util.Map;
  * version      :
  */
 
-@Service
+@Component
 @PropertySource("classpath:file.properties")
 public class IdenticonGeneratorUtil {
 
     @Autowired
-    Utils utils;
+    private Utils utils;
 
     @Value("${file.identicon.filePath}")
     private String filePath;

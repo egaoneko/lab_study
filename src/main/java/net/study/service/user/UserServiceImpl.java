@@ -1,10 +1,10 @@
 package net.study.service.user;
 
-import net.study.domain.File;
+import net.study.domain.Assets;
 import net.study.domain.User;
 import net.study.domain.form.UserCreateForm;
 import net.study.domain.form.UserUpdatePasswordForm;
-import net.study.repository.FileRepository;
+import net.study.repository.AssetsRepository;
 import net.study.repository.UserRepository;
 import net.study.util.identicon.IdenticonGeneratorUtil;
 import org.slf4j.Logger;
@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
@@ -41,11 +42,11 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
     private final IdenticonGeneratorUtil identiconGeneratorUtil;
-    private final FileRepository fileRepository;
+    private final AssetsRepository assetsRepository;
 
     @Autowired
-    public UserServiceImpl(FileRepository fileRepository, IdenticonGeneratorUtil identiconGeneratorUtil, UserRepository userRepository) {
-        this.fileRepository = fileRepository;
+    public UserServiceImpl(AssetsRepository assetsRepository, IdenticonGeneratorUtil identiconGeneratorUtil, UserRepository userRepository) {
+        this.assetsRepository = assetsRepository;
         this.identiconGeneratorUtil = identiconGeneratorUtil;
         this.userRepository = userRepository;
     }
@@ -85,16 +86,16 @@ public class UserServiceImpl implements UserService {
             return userRepository.save(user);
         }
 
-        java.io.File avatar = new java.io.File(filePath + fileMap.get("realPath"));
+        File avatar = new File(filePath + fileMap.get("realPath"));
 
-        File file = new File(fileMap.get("fileName"), fileMap.get("realPath"), avatar.length(), 0);
-        file = fileRepository.save(file);
+        Assets assets = new Assets(fileMap.get("fileName"), fileMap.get("realPath"), avatar.length(), 0);
+        assets = assetsRepository.save(assets);
 
-        user.setFile(file);
+        user.setAssets(assets);
         user=userRepository.save(user);
 
-        file.setUser(user);
-        fileRepository.save(file);
+        assets.setUser(user);
+        assetsRepository.save(assets);
 
         return user;
     }

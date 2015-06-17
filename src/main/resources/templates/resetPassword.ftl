@@ -13,7 +13,7 @@
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
-    <title>Study/Forgot/Password</title>
+    <title>${myApp.name}/Forgot/Password</title>
     </@layout.put>
 
     <@layout.put block="header" type="prepend">

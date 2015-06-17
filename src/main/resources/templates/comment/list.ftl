@@ -27,7 +27,7 @@
 
         <div id="${list.id?c}" class="list-group-item" style="margin-left: ${list.level * 30}px;">
             <div class="row-picture">
-                <img class="circle" src="<#if currentUser.file??>${currentUser.file.realPath}<#else>/img/user.png</#if>" alt="icon">
+                <img class="circle" src="<#if currentUser.assets??>${currentUser.assets.realPath}<#else>/img/user.png</#if>" alt="icon">
             </div>
             <div class="row-content">
                 <h4 class="list-group-item-heading">${list.user.name}<small>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;${list.getDifferentTime()}</small></h4>

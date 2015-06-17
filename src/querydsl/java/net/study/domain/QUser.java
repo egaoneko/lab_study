@@ -22,6 +22,8 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
+    public final QAssets assets;
+
     public final ListPath<Board, QBoard> boards = this.<Board, QBoard>createList("boards", Board.class, QBoard.class, PathInits.DIRECT2);
 
     public final ListPath<Comment, QComment> comments = this.<Comment, QComment>createList("comments", Comment.class, QComment.class, PathInits.DIRECT2);
@@ -29,8 +31,6 @@ public class QUser extends EntityPathBase<User> {
     public final DateTimePath<java.util.Date> createdDate = createDateTime("createdDate", java.util.Date.class);
 
     public final StringPath email = createString("email");
-
-    public final QFile file;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -60,7 +60,7 @@ public class QUser extends EntityPathBase<User> {
 
     public QUser(Class<? extends User> type, PathMetadata<?> metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.file = inits.isInitialized("file") ? new QFile(forProperty("file"), inits.get("file")) : null;
+        this.assets = inits.isInitialized("assets") ? new QAssets(forProperty("assets"), inits.get("assets")) : null;
     }
 
 }
