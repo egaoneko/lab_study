@@ -8,6 +8,7 @@ import net.study.error.LastChildAlreadyExistsException;
 import net.study.error.NotFoundException;
 import net.study.repository.AssetsRepository;
 import net.study.repository.UserRepository;
+import net.study.util.validator.ImageValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;

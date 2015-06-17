@@ -3,7 +3,7 @@ package net.study.controller;
 import net.study.domain.Assets;
 import net.study.domain.CurrentUser;
 import net.study.repository.AssetsRepository;
-import net.study.util.ImageValidator;
+import net.study.util.validator.ImageValidator;
 import net.study.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;

@@ -2,15 +2,13 @@ package net.study.domain.validator;
 
 import net.study.domain.form.UserCreateForm;
 import net.study.service.user.UserService;
+import net.study.util.validator.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -26,10 +24,12 @@ public class UserCreateFormValidator implements Validator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserCreateFormValidator.class);
     private final UserService userService;
+    private final EmailValidator emailValidator;
 
     @Autowired
-    public UserCreateFormValidator(UserService userService) {
+    public UserCreateFormValidator(UserService userService, EmailValidator emailValidator) {
         this.userService = userService;
+        this.emailValidator = emailValidator;
     }
 
     @Override
@@ -106,10 +106,7 @@ public class UserCreateFormValidator implements Validator {
     }
 
     private void validateEmailAddress(Errors errors, UserCreateForm form) {
-        try {
-            InternetAddress internetAddress = new InternetAddress(form.getEmail());
-            internetAddress.validate();
-        } catch (AddressException ex){
+        if(!emailValidator.validate(form.getEmail())){
             errors.reject("email.no_validate", "Email does not validate");
         }
     }

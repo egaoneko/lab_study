@@ -1,4 +1,4 @@
-package net.study.util;
+package net.study.util.validator;
 
 import net.study.Application;
 import org.junit.Assert;
@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
  * Date         : 6/17/15 | 6:23 AM
- * Description  :
+ * Description  : Image Validator(http://www.mkyong.com/regular-expressions/how-to-validate-image-file-extension-with-regular-expression/)
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
  */
@@ -34,7 +34,6 @@ public class ImageValidatorTest {
 
     @Before
     public void initData(){
-        imageValidator = new ImageValidator();
         validImageProvider1 = new String[] {
                 "a.jpg", "a.gif","a.png", "a.bmp",
                 "..jpg", "..gif","..png", "..bmp",
@@ -60,15 +59,11 @@ public class ImageValidatorTest {
             //Assert.assertEquals(true, valid);
         }
 
-    }
-
-    @Test
-    public void InValidImageTest() {
-
         for(String temp : validImageProvider2){
             boolean valid = imageValidator.validate(temp);
             LOGGER.debug("Image is valid : {}, {}", temp, valid);
             //Assert.assertEquals(false, valid);
         }
+
     }
 }

@@ -61,6 +61,8 @@ public class User {
     @OneToOne
     private Assets assets;
 
+    @OneToOne
+    private Contact contact;
 
     public Long getId() {
         return id;
@@ -140,6 +142,14 @@ public class User {
 
     public void setAssets(Assets assets) {
         this.assets = assets;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     @Override

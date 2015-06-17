@@ -37,7 +37,9 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
         return user.getName();
     }
 
-    public Assets getAssets(){ return user.getAssets();}
+    public Assets getAssets(){ return user.getAssets(); }
+
+    public Contact getContact(){ return user.getContact(); }
 
     @Override
     public String toString() {

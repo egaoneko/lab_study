@@ -1,4 +1,4 @@
-package net.study.util;
+package net.study.util.validator;
 
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
  * Date         : 6/17/15 | 6:21 AM
- * Description  : http://www.mkyong.com/regular-expressions/how-to-validate-image-file-extension-with-regular-expression/
+ * Description  : Image Validator(http://www.mkyong.com/regular-expressions/how-to-validate-image-file-extension-with-regular-expression/)
  * Copyright ⓒ 2013-2015 Donghyun Seo All rights reserved.
  * version      :
  */

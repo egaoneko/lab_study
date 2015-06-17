@@ -92,6 +92,18 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="contact" class="col-lg-2 control-label">Contact</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact" value="<#if currentUser.contact??>${currentUser.contact.content}</#if>">
+                                        <div class="togglebutton">
+                                            <label>
+                                                <input type="checkbox" <#if currentUser.contact??><#if currentUser.contact.validEntity == "VALID">checked=""</#if></#if> name="contactValidator" value="VALID"> Make public
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="inputFile" class="col-lg-2 control-label">Avatar</label>
                                     <div class="col-lg-10">
                                         <input type="text" readonly="" class="form-control floating-label" placeholder="Browse...">

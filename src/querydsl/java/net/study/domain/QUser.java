@@ -28,6 +28,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final ListPath<Comment, QComment> comments = this.<Comment, QComment>createList("comments", Comment.class, QComment.class, PathInits.DIRECT2);
 
+    public final QContact contact;
+
     public final DateTimePath<java.util.Date> createdDate = createDateTime("createdDate", java.util.Date.class);
 
     public final StringPath email = createString("email");
@@ -61,6 +63,7 @@ public class QUser extends EntityPathBase<User> {
     public QUser(Class<? extends User> type, PathMetadata<?> metadata, PathInits inits) {
         super(type, metadata, inits);
         this.assets = inits.isInitialized("assets") ? new QAssets(forProperty("assets"), inits.get("assets")) : null;
+        this.contact = inits.isInitialized("contact") ? new QContact(forProperty("contact"), inits.get("contact")) : null;
     }
 
 }
