@@ -35,7 +35,7 @@
 
             <div class="panel panel-${board.study.status.color}">
                 <div class="panel-heading">
-                    <h1>${board.title}</h1><h4 class="text-right">${board.getDifferentTime()}</h4>
+                    <h2>${board.title}</h2><h4 class="text-right">${board.getDifferentTime()}</h4>
                 </div>
                 <div class="panel-body">
 
@@ -158,7 +158,6 @@
                     <h3>${board.content}</h3>
 
                     <#assign user=board.user>
-                    <#assign messgeStudy=board.study>
                     <#include "../user/author.ftl">
 
                     <#if board.checkUser(currentUser.user)>

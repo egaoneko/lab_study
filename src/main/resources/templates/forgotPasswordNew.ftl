@@ -17,6 +17,11 @@
     </@layout.put>
 
     <@layout.put block="header" type="prepend">
+    <style>
+        body{
+            background: #009688;
+        }
+    </style>
     <#--<@layout.extends name="layouts/header.ftl">-->
     <#--</@layout.extends>-->
     </@layout.put>

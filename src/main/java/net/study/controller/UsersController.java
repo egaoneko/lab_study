@@ -39,7 +39,7 @@ public class UsersController {
 
     @RequestMapping("/users")
     public String getUsersPage(Model model,
-                                     @RequestParam(value = "p", required = false) Integer requestPage) {
+                               @RequestParam(value = "p", required = false) Integer requestPage) {
         LOGGER.debug("Getting users page");
 
         if(requestPage == null) requestPage = 1;

@@ -16,6 +16,11 @@
     </@layout.put>
 
     <@layout.put block="header" type="prepend">
+        <style>
+            body{
+                background: #009688;
+            }
+        </style>
         <#--<@layout.extends name="layouts/header.ftl">-->
         <#--</@layout.extends>-->
     </@layout.put>
@@ -33,6 +38,7 @@
 
         <section class="vertical-center">
             <div class="col-xs-9 col-sm-6 col-md-5 col-lg-4 panel panel-default">
+                <h1 class="text-primary text-center">ESEM</h1>
                 <section>
                     <form role="form" action="/login" id="form" method="post" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label for="title" class="col-lg-2 control-label">Title</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" name="title" id="title" placeholder="Title" size="100" value="${form.title}" required autofocus>
+                                    <input type="text" class="form-control" name="title" id="title" placeholder="Title" size="50" value="${form.title}" required autofocus>
                                 </div>
                             </div>
 

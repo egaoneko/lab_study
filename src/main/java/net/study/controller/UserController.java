@@ -1,7 +1,13 @@
 package net.study.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import net.study.domain.CurrentUser;
+import net.study.domain.Study;
+import net.study.domain.User;
 import net.study.domain.form.UserCreateForm;
 import net.study.domain.validator.UserCreateFormValidator;
+import net.study.repository.StudyRepository;
+import net.study.repository.UserRepository;
 import net.study.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -33,11 +41,13 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final UserCreateFormValidator userCreateFormValidator;
+    private final StudyRepository studyRepository;
 
     @Autowired
-    public UserController(UserService userService, UserCreateFormValidator userCreateFormValidator) {
+    public UserController(UserService userService, UserCreateFormValidator userCreateFormValidator, StudyRepository studyRepository) {
         this.userService = userService;
         this.userCreateFormValidator = userCreateFormValidator;
+        this.studyRepository = studyRepository;
     }
 
     @InitBinder("form")
@@ -49,8 +59,16 @@ public class UserController {
     @RequestMapping("/{id}")
     public ModelAndView getUserPage(@PathVariable Long id) {
         LOGGER.debug("Getting user page for user={}", id);
-        return new ModelAndView("user/user", "user", userService.getUserById(id)
-                .orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id))));
+        User user = userService.getUserById(id).orElseThrow(() -> new NoSuchElementException(String.format("User=%s not found", id)));
+        List < Study > ownStudyList = studyRepository.findAllByUser(user);
+        Set<Study> partStudyList = user.getStudySet();
+
+        ModelAndView modelAndView = new ModelAndView("user/user");
+        modelAndView.addObject("user",user);
+        modelAndView.addObject("ownStudyList",ownStudyList);
+        modelAndView.addObject("partStudyList",partStudyList);
+
+        return modelAndView;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

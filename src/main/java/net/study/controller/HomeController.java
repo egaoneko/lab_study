@@ -30,7 +30,7 @@ public class HomeController{
         if(currentUser==null){
             return "index";
         } else {
-            return "home";
+            return "redirect:/article/list";
         }
     }
 

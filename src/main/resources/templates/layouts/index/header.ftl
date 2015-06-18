@@ -7,6 +7,8 @@
  * version      :
  -->
 
+<#-- @ftlvariable name="currentUser" type="net.study.domain.CurrentUser" -->
+
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -40,7 +42,11 @@
                     <a href="/user/register" class="btn btn-primary-default btn-xl page-scroll">Sign Up</a>
                 </li>
                 <li>
-                    <a href="/login" class="btn-material btn-primary btn-xl page-scroll">Sign In</a>
+                    <#if currentUser??>
+                        <a href="/" class="btn-material btn-primary btn-xl page-scroll">Enter</a>
+                    <#else>
+                        <a href="/login" class="btn-material btn-primary btn-xl page-scroll">Sign In</a>
+                    </#if>
                 </li>
             </ul>
         </div>

@@ -14,7 +14,7 @@
 
 <div class="panel panel-${study.status.color}">
     <div class="panel-heading">
-        <h1>${study.title}</h1><h4 class="text-right">${study.getDifferentTime()}</h4>
+        <h2>${study.title}</h2><h4 class="text-right">${study.getDifferentTime()}</h4>
     </div>
     <div class="panel-body">
 
