@@ -2,10 +2,13 @@ package net.study.controller;
 
 import net.study.domain.CurrentUser;
 import net.study.domain.Study;
+import net.study.domain.User;
+import net.study.domain.enums.Status;
 import net.study.domain.form.StudyCreateForm;
 import net.study.domain.validator.StudyCreateFormValidator;
 import net.study.repository.BookRepository;
 import net.study.repository.StudyRepository;
+import net.study.repository.UserRepository;
 import net.study.service.study.StudyService;
 import net.study.util.Paging;
 import org.slf4j.Logger;
@@ -26,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -53,6 +57,9 @@ public class StudyController {
 
     @Autowired
     private StudyService studyService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private StudyCreateFormValidator studyCreateFormValidator;
@@ -208,5 +215,44 @@ public class StudyController {
     public Study studyJson(@RequestParam(value = "id", required = true) Long id){
         LOGGER.debug("Getting study json for id={}", id);
         return studyRepository.findOne(id);
+    }
+
+    @RequestMapping("/users/{studyId}")
+    public ModelAndView studyUsers(@ModelAttribute("currentUser")CurrentUser currentUser,
+                                   @PathVariable("studyId") Long studyId){
+        Study study =  studyRepository.findOne(studyId);
+        Set<User> users = study.getParticipants();
+
+        for(User user : users){
+            if(user.getId() == currentUser.getId()){
+                ModelAndView modelAndView = new ModelAndView("study/users");
+                modelAndView.addObject("users", users);
+                modelAndView.addObject("owner", study.getUser());
+                return modelAndView;
+            }
+        }
+
+        return new ModelAndView("redirect:/study/read/"+studyId);
+    }
+
+    @RequestMapping(value = "/users/{studyId}", method = RequestMethod.POST)
+    public String leaveStudy(@ModelAttribute("currentUser")CurrentUser currentUser,
+                             @PathVariable("studyId") Long studyId,
+                             @RequestParam(value = "userId", required = true) Long userId){
+        User user = userRepository.findOne(userId);
+        Study study = studyRepository.findOne(studyId);
+
+        if(userId == currentUser.getId() || currentUser.getUser().getId() == study.getUser().getId()){
+            Set<User> userSet = study.getParticipants();
+            userSet.remove(user);
+            if(userSet.size() < study.getParticipant()){
+                if(study.getStatus().equals(Status.EXCESS)){
+                    study.setStatus(Status.OPEN);
+                }
+            }
+            studyRepository.save(study);
+            return "redirect:/study/read/"+studyId;
+        }
+        return "redirect:/study/read/"+studyId;
     }
 }

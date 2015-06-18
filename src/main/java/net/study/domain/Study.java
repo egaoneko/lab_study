@@ -86,6 +86,13 @@ public class Study {
     @JsonBackReference
     private List<Board> boardList;
 
+    @ManyToMany
+    @JoinTable(name = "PARTICIPANTS",
+            joinColumns = @JoinColumn(name = "STUDY_ID_FRK"),
+            inverseJoinColumns = @JoinColumn(name = "USER_ID_FRK"))
+    @JsonBackReference
+    private Set<User> participants;
+
     public Study() {
     }
 
@@ -209,9 +216,21 @@ public class Study {
         this.boardList = boardList;
     }
 
+    public Set<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Set<User> participants) {
+        this.participants = participants;
+    }
+
+    public int getParticipantNum(){
+        return participants.size();
+    }
+
     /*
-                        Login User Check
-                         */
+    Login User Check
+     */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;

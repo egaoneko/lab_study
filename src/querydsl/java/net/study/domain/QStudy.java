@@ -40,6 +40,8 @@ public class QStudy extends EntityPathBase<Study> {
 
     public final NumberPath<Integer> participant = createNumber("participant", Integer.class);
 
+    public final SetPath<User, QUser> participants = this.<User, QUser>createSet("participants", User.class, QUser.class, PathInits.DIRECT2);
+
     public final DateTimePath<java.util.Date> postingDate = createDateTime("postingDate", java.util.Date.class);
 
     public final NumberPath<Integer> price = createNumber("price", Integer.class);

@@ -2,6 +2,8 @@ package net.study.service.study;
 
 import net.study.domain.Book;
 import net.study.domain.Study;
+import net.study.domain.User;
+import net.study.domain.enums.Status;
 import net.study.domain.form.StudyCreateForm;
 import net.study.repository.BookRepository;
 import net.study.repository.StudyRepository;
@@ -61,6 +63,14 @@ public class StudyServiceImpl implements StudyService {
         } else {
             bookSet = new HashSet<>();
         }
+
+        if(form.getParticipant()<2){
+            study.setStatus(Status.EXCESS);
+        }
+
+        Set<User> userSet = new HashSet<>();
+        userSet.add(userRepository.findOne(form.getUserId()));
+        study.setParticipants(userSet);
 
         return studyRepository.save(study);
     }

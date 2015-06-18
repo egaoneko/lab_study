@@ -44,6 +44,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final EnumPath<net.study.domain.enums.Role> role = createEnum("role", net.study.domain.enums.Role.class);
 
+    public final SetPath<Study, QStudy> studySet = this.<Study, QStudy>createSet("studySet", Study.class, QStudy.class, PathInits.DIRECT2);
+
     public QUser(String variable) {
         this(User.class, forVariable(variable), INITS);
     }

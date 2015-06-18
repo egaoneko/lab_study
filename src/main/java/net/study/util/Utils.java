@@ -5,7 +5,7 @@ import net.study.domain.Reply;
 import net.study.domain.User;
 import net.study.error.CannotReplyException;
 import net.study.error.LastChildAlreadyExistsException;
-import net.study.error.NotFoundException;
+import net.study.error.ResourceNotFoundException;
 import net.study.repository.AssetsRepository;
 import net.study.repository.UserRepository;
 import net.study.util.validator.ImageValidator;
@@ -59,9 +59,9 @@ public class Utils {
     /*
     Check Parent
      */
-    public void checkParent(Reply parent, long parentId) throws NotFoundException, CannotReplyException {
+    public void checkParent(Reply parent, long parentId) throws ResourceNotFoundException, CannotReplyException {
         if(parent == null){
-            throw new NotFoundException("Can not found parent : " + parentId);
+            throw new ResourceNotFoundException("Can not found parent : " + parentId);
         }
 
         int parentLevel = parent.getLevel();

@@ -1,10 +1,12 @@
 package net.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import net.study.domain.enums.Role;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -63,6 +65,13 @@ public class User {
 
     @OneToOne
     private Contact contact;
+
+    @ManyToMany
+    @JoinTable(name = "PARTICIPANTS",
+            joinColumns = @JoinColumn(name = "USER_ID_FRK"),
+            inverseJoinColumns = @JoinColumn(name = "STUDY_ID_FRK"))
+    @JsonBackReference
+    private Set<Study> studySet;
 
     public Long getId() {
         return id;
@@ -150,6 +159,14 @@ public class User {
 
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+
+    public Set<Study> getStudySet() {
+        return studySet;
+    }
+
+    public void setStudySet(Set<Study> studySet) {
+        this.studySet = studySet;
     }
 
     @Override

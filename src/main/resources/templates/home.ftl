@@ -42,6 +42,7 @@
                 </#if>
                 <li><a href="/article/list">Article list</a></li>
                 <li><a href="/study/list">Study list</a></li>
+                <li><a href="/message/list/receive">Receive Messages</a></li>
             </ul>
         </nav>
     </@layout.put>

@@ -121,8 +121,8 @@ public class Board {
     }
 
     /*
-        Login User Check
-         */
+    Login User Check
+     */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;

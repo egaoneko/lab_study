@@ -71,7 +71,7 @@
                                 <td class="text-center"><span class="label label-${board.study.onOffLine.color}">${board.study.onOffLine.title}</span></td>
                                 <td class="text-center"><span class="label label-${board.study.charge.color}">${board.study.charge.title}</span></td>
                                 <td class="text-center"><span class="label label-default">${board.study.price?c}</span></td>
-                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.participant?c}</span></td>
+                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.participants?size}/${board.study.participant?c}</span></td>
                                 </tr>
                             </tbody>
                     </table>
@@ -108,7 +108,7 @@
                             </tr>
                             <tr>
                                 <th class="text-center">Participant</th>
-                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.participant?c}</span></td>
+                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.participants?size}/${board.study.participant?c}</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -157,17 +157,62 @@
 
                     <h3>${board.content}</h3>
 
+                    <#assign user=board.user>
+                    <#assign messgeStudy=board.study>
                     <#include "../user/author.ftl">
 
                     <#if board.checkUser(currentUser.user)>
                         <div class="text-right">
                             <input type="button" class="btn btn-info" onclick="location.href='/article/update/${board.id?c}'" value="Update"/>
+                            <input type="button" class="btn btn-warning" onclick="location.href='/study/users/${board.study.id?c}'" value="Leave"/>
                             <form action="/article/delete" method="post" style="display: inline;">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 <input type="hidden" name="boardId" value="${board.id?c}"/>
                                 <input type="submit" class="btn btn-danger" value="Delete" >
                             </form>
                         </div>
+                    <#else>
+                        <#if board.study.status == "EXCESS" || board.study.status == "CLOSE">
+                            <div class="text-right">
+                                <input type="button" class="btn btn-warning" onclick="location.href='/study/users/${board.study.id?c}'" value="Leave"/>
+                                <button class="btn btn-${board.study.status.color} btn-raised btn-lg disabled" onclick="">Apply</button>
+                            </div>
+                        <#else>
+                            <div class="text-right">
+                                <input type="button" class="btn btn-warning" onclick="location.href='/study/users/${board.study.id?c}'" value="Leave"/>
+                                <button class="btn btn-info btn-raised btn-lg" onclick="messageBox()">Apply</button>
+                            </div>
+
+                            <div id="message_box" style="display: none">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Apply for this study</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <form action="/message/send" id="message_form" method="post">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                            <input type="hidden" name="receiverId" id="receiverId" value="${user.getId()}"/>
+                                            <input type="hidden" name="messageStatus" id="messageStatus" value="JOIN"/>
+                                            <input type="hidden" name="studyId" id="studyId" value="${board.study.id}"/>
+
+                                            <fieldset>
+                                                <div id="message_warn" class="form-group">
+                                                    <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+                                                        <textarea class="form-control" rows="5" name="message" id="message" placeholder="Leave your message" required></textarea>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+
+                                            <div class="col-lg-12 text-center">
+                                                <input type="button" class="btn btn-default" onclick="messageBox()" value="Cancel">
+                                                <input type="button" class="btn btn-info" onclick="messageAjax()" value="Send" >
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </#if>
                     </#if>
 
                     <hr>
@@ -187,6 +232,7 @@
 
     <@layout.put block="script">
         <script src="/js/comment.js"></script>
+        <script src="/js/message.js"></script>
         <script type="text/javascript">
 
             $(function () {
