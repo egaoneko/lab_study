@@ -32,33 +32,46 @@
                 <legend class="text-center">Study List</legend>
 
                 <table class="table table-striped table-hover">
-                    <thead class="text-center">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="50%">
+                        <col width="15%">
+                        <col width="15%">
+                    </colgroup>
+                    <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Posting Date</th>
+                            <th class="text-center">Area</th>
+                            <th class="text-center">Category</th>
+                            <th class="text-center">Title</th>
+                            <th class="text-center">Author</th>
+                            <th class="text-center">Posting Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <#if hasStudy == false>
                         <tr>
-                            <td colspan="4">
+                            <td colspan="5">
                                 Can not found articles.
                             </td>
                         </tr>
 
                         <#else>
                             <#list studyList as list>
-                            <tr>
-                                <td>${list.id?c}</td>
+                            <tr class="<#if list.status.name() == "EXCESS" || list.status.name() == "CLOSE">${list.status.color}</#if>">
+                                <td class="text-center">${list.area.title}</td>
+                                <td class="text-center">${list.category.title}</td>
                                 <td>
                                     <a href="javascript:void(0)" onclick="load_page(${list.id?c})" data-toggle="modal" data-target="#read-dialog">
                                     ${list.title}
-                                    </a>
+                                    </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="label label-${list.status.color}">${list.status.title}</span>
+                                    <span class="label label-${list.way.color}">${list.way.title}</span>
+                                    <span class="label label-${list.onOffLine.color}">${list.onOffLine.title}</span>
+                                    <span class="label label-${list.charge.color}">${list.charge.title}</span>
                                 </td>
-                                <td>${list.user.getName()}</td>
-                                <td>${list.getDifferentTime()}</td>
+                                <td class="text-center">${list.user.name}</td>
+                                <td class="text-center">${list.getDifferentTime()}</td>
                             </tr>
                             </#list>
                         </#if>

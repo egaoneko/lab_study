@@ -1,7 +1,10 @@
 package net.study.repository;
 
 import net.study.domain.Study;
+import net.study.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * First Editor : Donghyun Seo (egaoneko@naver.com)
@@ -13,4 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface StudyRepository extends JpaRepository<Study, Long> {
+
+    List<Study> findAllByUser(User user);
 }

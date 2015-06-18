@@ -1,5 +1,7 @@
 package net.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,8 +49,9 @@ public class Board {
     @JoinColumn(name="user_id")
     private User user;
 
-    //@Column(nullable = false)
-    //private int fileId;
+    @ManyToOne
+    @JoinColumn(name="study_id")
+    private Study study;
 
     public Board() {
     }
@@ -109,9 +112,17 @@ public class Board {
         this.user = user;
     }
 
+    public Study getStudy() {
+        return study;
+    }
+
+    public void setStudy(Study study) {
+        this.study = study;
+    }
+
     /*
-    Login User Check
-     */
+        Login User Check
+         */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;

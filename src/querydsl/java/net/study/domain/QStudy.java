@@ -24,6 +24,8 @@ public class QStudy extends EntityPathBase<Study> {
 
     public final EnumPath<net.study.domain.enums.Area> area = createEnum("area", net.study.domain.enums.Area.class);
 
+    public final ListPath<Board, QBoard> boardList = this.<Board, QBoard>createList("boardList", Board.class, QBoard.class, PathInits.DIRECT2);
+
     public final SetPath<Book, QBook> bookSet = this.<Book, QBook>createSet("bookSet", Book.class, QBook.class, PathInits.DIRECT2);
 
     public final EnumPath<net.study.domain.enums.Category> category = createEnum("category", net.study.domain.enums.Category.class);

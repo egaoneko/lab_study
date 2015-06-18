@@ -146,12 +146,14 @@
                                 <label class="col-lg-2 control-label">Status</label>
                                 <div class="col-lg-10">
                                     <#list form.getStatusList() as list>
-                                        <div class="radio radio-primary">
-                                            <label>
-                                                <input type="radio" name="status" id="status_${list_index}" value="${list}" <#if form.status == list >checked</#if>/>
-                                            ${list.title}
-                                            </label>
-                                        </div>
+                                        <#if list.name() != "EXCESS">
+                                            <div class="radio radio-primary">
+                                                <label>
+                                                    <input type="radio" name="status" id="status_${list_index}" value="${list}" <#if form.status == list >checked</#if>/>
+                                                    ${list.title}
+                                                </label>
+                                            </div>
+                                        </#if>
                                     </#list>
                                 </div>
                             </div>

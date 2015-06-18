@@ -32,6 +32,8 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final NumberPath<Integer> readCount = createNumber("readCount", Integer.class);
 
+    public final QStudy study;
+
     public final StringPath title = createString("title");
 
     public final QUser user;
@@ -54,6 +56,7 @@ public class QBoard extends EntityPathBase<Board> {
 
     public QBoard(Class<? extends Board> type, PathMetadata<?> metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.study = inits.isInitialized("study") ? new QStudy(forProperty("study"), inits.get("study")) : null;
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user"), inits.get("user")) : null;
     }
 

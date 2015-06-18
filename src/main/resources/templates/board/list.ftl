@@ -37,36 +37,50 @@
                 <legend class="text-center">Article List</legend>
 
                 <table class="table table-striped table-hover">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Posting Date</th>
-                            <th>Read Count</th>
-                        </tr>
+                    <colgroup>
+                        <col width="10%">
+                        <col width="10%">
+                        <col width="50%">
+                        <col width="10%">
+                        <col width="15%">
+                        <col width="5%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="text-center">Area</th>
+                        <th class="text-center">Category</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Author</th>
+                        <th class="text-center">Posting Date</th>
+                        <th class="text-center">Read Cnt</th>
+                    </tr>
                     </thead>
                     <tbody>
                         <#if hasBoard == false>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="6">
                                 Can not found articles.
                             </td>
                         </tr>
 
                         <#else>
                             <#list boardList as list>
-                            <tr>
-                                <td>${list.id?c}</td>
-                                <td>
-                                    <a href="javascript:void(0)" onclick="load_page(${list.id?c})" data-toggle="modal" data-target="#read-dialog">
-                                    ${list.title}
-                                    </a>
-                                </td>
-                                <td>${list.user.name}</td>
-                                <td>${list.getDifferentTime()}</td>
-                                <td>${list.readCount}</td>
-                            </tr>
+                                <tr class="<#if list.study.status.name() == "EXCESS" || list.study.status.name() == "CLOSE">${list.study.status.color}</#if>">
+                                    <td class="text-center">${list.study.area.title}</td>
+                                    <td class="text-center">${list.study.category.title}</td>
+                                    <td>
+                                        <a href="javascript:void(0)" onclick="load_page(${list.id?c})" data-toggle="modal" data-target="#read-dialog">
+                                        ${list.title}
+                                        </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span class="label label-${list.study.status.color}">${list.study.status.title}</span>
+                                        <span class="label label-${list.study.way.color}">${list.study.way.title}</span>
+                                        <span class="label label-${list.study.onOffLine.color}">${list.study.onOffLine.title}</span>
+                                        <span class="label label-${list.study.charge.color}">${list.study.charge.title}</span>
+                                    </td>
+                                    <td class="text-center">${list.user.name}</td>
+                                    <td class="text-center">${list.getDifferentTime()}</td>
+                                    <td class="text-center">${list.readCount}</td>
+                                </tr>
                             </#list>
                         </#if>
                     </tbody>

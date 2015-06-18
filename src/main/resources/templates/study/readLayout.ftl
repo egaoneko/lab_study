@@ -29,48 +29,86 @@
 
             <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
 
-                <div class="panel panel-primary">
+                <div class="panel panel-${study.status.color}">
                     <div class="panel-heading">
                         <h1>${study.title}</h1><h4 class="text-right">${study.getDifferentTime()}</h4>
                     </div>
                     <div class="panel-body">
 
-                        <table class="table table-striped table-hover ">
+                        <table class="table table-striped table-hover hidden-xs hidden-sm">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="10%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Category</th>
+                                    <th class="text-center">Area</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Way</th>
+                                    <th class="text-center">On-Off Line</th>
+                                    <th class="text-center">Charge</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Participant</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                <tr>
-                                    <th>Category</th>
-                                    <td><span class="label label-default">${study.category}</span></td>
-                                </tr>
-                                <tr>
-                                    <th>Area</th>
-                                    <td><span class="label label-default">${study.area}</span></td>
-                                </tr>
-                                <tr>
-                                    <th>Charge</th>
-                                    <td><span class="label label-default">${study.charge}</span></td>
-                                </tr>
-                                <tr>
-                                    <th>On-Off Line</th>
-                                    <td><span class="label label-default">${study.onOffLine}</span></td>
-                                </tr>
-                                <tr>
-                                    <th>Way</th>
-                                    <td><span class="label label-default">${study.way}</span></td>
-                                </tr>
-                                <tr>
-                                    <th>Price</th>
-                                    <td><span class="label label-default">${study.price?c}</span></td>
-                                </tr>
-                                <tr>
-                                    <th>Participant</th>
-                                    <td><span class="label label-default">${study.participant?c}</span></td>
-                                </tr>
-                                <tr>
-                                    <th>Status</th>
-                                    <td><span class="label label-default">${study.status}</span></td>
+                                <tr class="${study.status.color}">
+                                    <td class="text-center"><span class="label label-default">${study.category.title}</span></td>
+                                    <td class="text-center"><span class="label label-default">${study.area.title}</span></td>
+                                    <td class="text-center"><span class="label label-${study.status.color}">${study.status.title}</span></td>
+                                    <td class="text-center"><span class="label label-${study.way.color}">${study.way.title}</span></td>
+                                    <td class="text-center"><span class="label label-${study.onOffLine.color}">${study.onOffLine.title}</span></td>
+                                    <td class="text-center"><span class="label label-${study.charge.color}">${study.charge.title}</span></td>
+                                    <td class="text-center"><span class="label label-default">${study.price?c}</span></td>
+                                    <td class="text-center"><span class="label label-${study.status.color}">${study.participant?c}</span></td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <table class="table table-striped table-hover hidden-md hidden-lg">
+                            <tbody>
+                                <tr>
+                                    <th class="text-center">Category</th>
+                                    <td class="text-center"><span class="label label-default">${study.category.title}</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Area</th>
+                                    <td class="text-center"><span class="label label-default">${study.area.title}</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Status</th>
+                                    <td class="text-center"><span class="label label-${study.status.color}">${study.status.title}</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Way</th>
+                                    <td class="text-center"><span class="label label-${study.way.color}">${study.way.title}</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">On-Off Line</th>
+                                    <td class="text-center"><span class="label label-${study.onOffLine.color}">${study.onOffLine.title}</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Charge</th>
+                                    <td class="text-center"><span class="label label-${study.charge.color}">${study.charge.title}</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Price</th>
+                                    <td class="text-center"><span class="label label-default">${study.price?c}</span></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Participant</th>
+                                    <td class="text-center"><span class="label label-${study.status.color}">${study.participant?c}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
 
                         <table class="table table-striped table-hover">
                             <caption>Book</caption>
@@ -115,6 +153,8 @@
                         <hr>
 
                         <h3>${study.content}</h3>
+
+                        <#include "../user/author.ftl">
 
                         <#if study.checkUser(currentUser.user)>
                             <div class="text-right">

@@ -3,6 +3,7 @@ package net.study.controller;
 import net.study.domain.Board;
 import net.study.domain.CurrentUser;
 import net.study.repository.BoardRepository;
+import net.study.repository.StudyRepository;
 import net.study.util.Paging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,9 @@ public class BoardController {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Autowired
+    private StudyRepository studyRepository;
+
     @RequestMapping("/list")
     public String boardList(Model model,
                             @RequestParam(value = "p", required = false) Integer requestPage){
@@ -68,8 +72,11 @@ public class BoardController {
     }
 
     @RequestMapping("/write")
-    public String boardWrite() throws Exception{
+    public String boardWrite(@ModelAttribute("currentUser")CurrentUser currentUser,
+                             Model model) throws Exception{
         LOGGER.debug("Getting board write form");
+
+        model.addAttribute("studyList", studyRepository.findAllByUser(currentUser.getUser()));
 
         return "board/write";
     }
@@ -77,8 +84,9 @@ public class BoardController {
     @RequestMapping(value = "/write", method = RequestMethod.POST)
     public String boardWrite(@ModelAttribute("currentUser")CurrentUser currentUser,
                              @RequestParam(value = "title", required = true) String title,
-                             @RequestParam(value = "content", required = true ) String content){
-        LOGGER.debug("Getting board write for title={}, content={}", title, content);
+                             @RequestParam(value = "content", required = true ) String content,
+                             @RequestParam(value = "study", required = true) Long study){
+        LOGGER.debug("Getting board write for title={}, content={}, study={}", title, content, study);
 
         Board board = new Board();
         board.setTitle(title);
@@ -86,6 +94,7 @@ public class BoardController {
         board.setPostingDate(new Date());
         board.setUser(currentUser.getUser());
         board.setReadCount(0);
+        board.setStudy(studyRepository.findOne(study));
 
         boardRepository.save(board);
 
@@ -125,6 +134,7 @@ public class BoardController {
             return "redirect:/article/read/"+boardId;
         }
 
+        model.addAttribute("studyList", studyRepository.findAllByUser(currentUser.getUser()));
         model.addAttribute("board", board);
 
         return "board/update";
@@ -134,8 +144,9 @@ public class BoardController {
     public String boardUpdate(@ModelAttribute("currentUser")CurrentUser currentUser,
                               @PathVariable("boardId") Long boardId,
                               @RequestParam(value = "title", required = true) String title,
-                              @RequestParam(value = "content", required = true ) String content){
-        LOGGER.debug("Getting board update for id={}, title={}, content={}", boardId, title, content);
+                              @RequestParam(value = "content", required = true ) String content,
+                              @RequestParam(value = "study", required = true) Long study){
+        LOGGER.debug("Getting board update for id={}, title={}, content={}, study={}", boardId, title, content, study);
 
         Board board = boardRepository.findOne(boardId);
 
@@ -145,6 +156,7 @@ public class BoardController {
 
         if(!board.getTitle().equals(title)) board.setTitle(title);
         if(!board.getContent().equals(content)) board.setContent(content);
+        if(!board.getStudy().getId().equals(study)) board.setStudy(studyRepository.findOne(study));
 
         boardRepository.save(board);
 

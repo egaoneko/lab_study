@@ -1,10 +1,12 @@
 package net.study.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import net.study.domain.enums.*;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -36,6 +38,7 @@ public class Study {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonBackReference
     private User user;
 
     @Column(nullable = false)
@@ -73,6 +76,15 @@ public class Study {
             joinColumns = @JoinColumn(name = "STUDY_ID_FRK"),
             inverseJoinColumns = @JoinColumn(name = "BOOK_ID_FRK"))
     private Set<Book> bookSet;
+
+    @OneToMany(
+            targetEntity = Board.class,
+            mappedBy = "study",
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.EAGER
+    )
+    @JsonBackReference
+    private List<Board> boardList;
 
     public Study() {
     }
@@ -189,9 +201,17 @@ public class Study {
         this.bookSet = bookSet;
     }
 
+    public List<Board> getBoardList() {
+        return boardList;
+    }
+
+    public void setBoardList(List<Board> boardList) {
+        this.boardList = boardList;
+    }
+
     /*
-                Login User Check
-                 */
+                        Login User Check
+                         */
     public boolean checkUser(User user){
         if(this.user.getId() == user.getId()){
             return true;

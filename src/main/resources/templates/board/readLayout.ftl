@@ -33,12 +33,131 @@
 
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
 
-            <div class="panel panel-primary">
+            <div class="panel panel-${board.study.status.color}">
                 <div class="panel-heading">
                     <h1>${board.title}</h1><h4 class="text-right">${board.getDifferentTime()}</h4>
                 </div>
                 <div class="panel-body">
+
+                    <table class="table table-striped table-hover hidden-xs hidden-sm">
+                        <colgroup>
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="text-center">Category</th>
+                                <th class="text-center">Area</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Way</th>
+                                <th class="text-center">On-Off Line</th>
+                                <th class="text-center">Charge</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Participant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="${board.study.status.color}">
+                                <td class="text-center"><span class="label label-default">${board.study.category.title}</span></td>
+                                <td class="text-center"><span class="label label-default">${board.study.area.title}</span></td>
+                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.status.title}</span></td>
+                                <td class="text-center"><span class="label label-${board.study.way.color}">${board.study.way.title}</span></td>
+                                <td class="text-center"><span class="label label-${board.study.onOffLine.color}">${board.study.onOffLine.title}</span></td>
+                                <td class="text-center"><span class="label label-${board.study.charge.color}">${board.study.charge.title}</span></td>
+                                <td class="text-center"><span class="label label-default">${board.study.price?c}</span></td>
+                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.participant?c}</span></td>
+                                </tr>
+                            </tbody>
+                    </table>
+
+                    <table class="table table-striped table-hover hidden-md hidden-lg">
+                        <tbody>
+                            <tr>
+                                <th class="text-center">Category</th>
+                                <td class="text-center"><span class="label label-default">${board.study.category.title}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Area</th>
+                                <td class="text-center"><span class="label label-default">${board.study.area.title}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Status</th>
+                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.status.title}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Way</th>
+                                <td class="text-center"><span class="label label-${board.study.way.color}">${board.study.way.title}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">On-Off Line</th>
+                                <td class="text-center"><span class="label label-${board.study.onOffLine.color}">${board.study.onOffLine.title}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Charge</th>
+                                <td class="text-center"><span class="label label-${board.study.charge.color}">${board.study.charge.title}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Price</th>
+                                <td class="text-center"><span class="label label-default">${board.study.price?c}</span></td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Participant</th>
+                                <td class="text-center"><span class="label label-${board.study.status.color}">${board.study.participant?c}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-hover">
+                        <caption>Book</caption>
+                        <colgroup>
+                            <col width="10%">
+                            <col width="30%">
+                            <col width="20%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="10%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col">Cover</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Publisher</th>
+                                <th scope="col">Publish Date</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list">
+                            <#if board.study.bookSet?has_content>
+                                <#list board.study.bookSet as book>
+                                <tr id="book_${book.id}">
+                                    <td><img src="${book.image}"  width="50px" height="70px" /></td>
+                                    <td>${book.title}</td>
+                                    <td>${book.author}</td>
+                                    <td>${book.publisher}</td>
+                                    <td>${book.pubdate}</td>
+                                    <td>${book.price}</td>
+                                </tr>
+                                </#list>
+                            <#else>
+                                <tr class="__oldlist" style="">
+                                    <td colspan="6">Can not found.</td>
+                                </tr>
+                            </#if>
+                        </tbody>
+                    </table>
+
+                    <hr>
+
                     <h3>${board.content}</h3>
+
+                    <#include "../user/author.ftl">
 
                     <#if board.checkUser(currentUser.user)>
                         <div class="text-right">

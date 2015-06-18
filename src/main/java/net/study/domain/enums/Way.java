@@ -11,16 +11,23 @@ package net.study.domain.enums;
 
 public enum Way {
 
-    STUDY("스터디"),
-    LECTURE("강의");
+    STUDY("스터디","info"),
+    LECTURE("강의","warning");
 
     private String title;
+    private String color;
 
-    Way(String title) {
+    Way(String title, String color) {
+
         this.title = title;
+        this.color = color;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

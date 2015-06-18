@@ -11,16 +11,23 @@ package net.study.domain.enums;
 
 public enum Status {
 
-    OPEN("모집"),
-    CLOSE("종료");
+    OPEN("모집","info"),
+    EXCESS("초과","warning"),
+    CLOSE("종료","danger");
 
     private String title;
+    private String color;
 
-    Status(String title) {
+    Status(String title, String color) {
         this.title = title;
+        this.color = color;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

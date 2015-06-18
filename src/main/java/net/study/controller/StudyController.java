@@ -202,5 +202,11 @@ public class StudyController {
 
         return "redirect:/study/list";
     }
-    
+
+    @RequestMapping("/json")
+    @ResponseBody
+    public Study studyJson(@RequestParam(value = "id", required = true) Long id){
+        LOGGER.debug("Getting study json for id={}", id);
+        return studyRepository.findOne(id);
+    }
 }

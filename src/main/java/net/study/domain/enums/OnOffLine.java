@@ -11,16 +11,22 @@ package net.study.domain.enums;
 
 public enum OnOffLine {
 
-    OFFLINE("오프라인"),
-    ONLINE("온라인");
+    OFFLINE("오프라인","info"),
+    ONLINE("온라인","warning");
 
     private String title;
+    private String color;
 
-    OnOffLine(String title) {
+    OnOffLine(String title, String color) {
         this.title = title;
+        this.color = color;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

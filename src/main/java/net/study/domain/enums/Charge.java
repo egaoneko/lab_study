@@ -11,16 +11,22 @@ package net.study.domain.enums;
 
 public enum Charge {
 
-    FREE("무료"),
-    CHARGED("유료");
+    FREE("무료","info"),
+    CHARGED("유료","warning");
 
     private String title;
+    private String color;
 
-    Charge(String title) {
+    Charge(String title, String color) {
         this.title = title;
+        this.color = color;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

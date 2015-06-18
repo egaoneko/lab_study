@@ -9,6 +9,7 @@
 
 <#-- @ftlvariable name="board" type="net.study.domain.Board" -->
 <#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
+<#-- @ftlvariable name="studyList" type="java.util.List<net.study.domain.Study>" -->
 
 <@layout.extends name="layouts/default.ftl">
     <@layout.put block="head">
@@ -41,6 +42,19 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="study" class="col-lg-2 control-label">Study</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control" name="study" id="study" required>
+                                        <#if studyList??>
+                                            <#list studyList as list>
+                                                <option value="${list.id}" <#if list.id == board.study.id>selected=""</#if>>${list.title}</option>
+                                            </#list>
+                                        </#if>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="content" class="col-lg-2 control-label">Content</label>
                                 <div class="col-lg-10">
                                     <textarea class="form-control" rows="20" name="content" id="content" placeholder="Write your content" required>${board.content}</textarea>
@@ -66,5 +80,24 @@
     </@layout.put>
 
     <@layout.put block="script">
+        <script type="text/javascript">
+
+            contextPath = "${rc.getContextPath()}";
+
+            $(function(){
+                $('#study').change(function(){
+                    $.ajax({
+                        url: contextPath + "/study/json",
+                        dataType:'json',
+                        data:{'id':$("#study option:selected").val()},
+                        type:'GET',
+                        success:function(result){
+                            $('#title').attr('value', result['title']);
+                            $('#content').text(result['content']);
+                        }
+                    });
+                })
+            })
+        </script>
     </@layout.put>
 </@layout.extends>
