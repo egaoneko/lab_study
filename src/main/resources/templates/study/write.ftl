@@ -161,7 +161,7 @@
                             <div class="form-group">
                                 <label for="content" class="col-lg-2 control-label">Description</label>
                                 <div class="col-lg-10">
-                                    <textarea class="form-control" rows="10" name="content" id="content" placeholder="Description" required></textarea>
+                                    <textarea class="form-control ckeditor" rows="10" name="content" id="content" placeholder="Description" required></textarea>
                                 </div>
                             </div>
 

@@ -36,7 +36,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/forgot_password/**","/study/list","/study/read/**").permitAll()
                     .antMatchers("/users/**").hasAuthority("ADMIN")
                     .antMatchers("/public/**","/resources/**","/resources/public/**","/webjars/**").permitAll()
-                    .antMatchers("/css/**","/js/**","/img/**","/jui/**","/Material/**","/startbootstrap-creative/**").permitAll()
+                    .antMatchers("/css/**","/js/**","/img/**","/jui/**","/Material/**","/startbootstrap-creative/**","/ckeditor/**").permitAll()
                     .anyRequest().fullyAuthenticated()
                     .and()
                 .formLogin()
