@@ -46,6 +46,7 @@
 
         <section class="vertical-center">
             <div class="col-xs-9 col-sm-6 col-md-5 col-lg-4 panel panel-default">
+                <h1 class="text-primary text-center">${myApp.name}</h1>
                 <section>
                     <form role="form" action="" method="post" class="form-horizontal">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -93,7 +93,7 @@
                         type:'GET',
                         success:function(result){
                             $('#title').attr('value', result['title']);
-                            $('#content').text(result['content']);
+                            CKEDITOR.instances['content'].setData(result['content']);;
                         }
                     });
                 })
