@@ -1,4 +1,4 @@
-<#--
+0000000000<#--
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
  * Date         : 6/13/15
@@ -49,9 +49,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
-                        <h2 class="section-heading">We've got what you need!</h2>
+                        <h2 class="section-heading">study together!</h2>
                         <hr class="light">
-                        <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
+                        <p class="text-faded">Success doesn't come to anyone, but it comes to the self-controlled and the hard-working.The payoff of efforts never disappear without redemption!</p>
                         <a href="#" class="btn btn-default btn-xl">Get Started!</a>
                     </div>
                 </div>
@@ -73,28 +73,28 @@
                         <div class="service-box">
                             <i class="fa fa-4x fa-diamond wow bounceIn text-primary"></i>
                             <h3>Sturdy Templates</h3>
-                            <p class="text-muted">Our templates are updated regularly so they don't break.</p>
+                            <p class="text-muted">Our website provides the space for creating the study group.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="service-box">
                             <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s"></i>
-                            <h3>Ready to Ship</h3>
-                            <p class="text-muted">You can use this theme as is, or you can make changes!</p>
+                            <h3>Ready to learn</h3>
+                            <p class="text-muted">You can study with various people!</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="service-box">
                             <i class="fa fa-4x fa-newspaper-o wow bounceIn text-primary" data-wow-delay=".2s"></i>
                             <h3>Up to Date</h3>
-                            <p class="text-muted">We update dependencies to keep things fresh.</p>
+                            <p class="text-muted">Everyday new study group will be opened.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="service-box">
                             <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s"></i>
-                            <h3>Made with Love</h3>
-                            <p class="text-muted">You have to make your websites with love these days!</p>
+                            <h3>Skills Development</h3>
+                            <p class="text-muted">Create a portfolio of your own!</p>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
         <aside class="bg-dark">
             <div class="container text-center">
                 <div class="call-to-action">
-                    <h2>Free Download at Start Bootstrap!</h2>
+                    <h2> Project Type </h2>
                     <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>
                 </div>
             </div>
@@ -213,15 +213,15 @@
                     <div class="col-lg-8 col-lg-offset-2 text-center">
                         <h2 class="section-heading">Let's Get In Touch!</h2>
                         <hr class="primary">
-                        <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                        <p>Do you have any questions for us?? Give us a call or send us an email and we will get back to you as soon as possible!</p>
                     </div>
                     <div class="col-lg-4 col-lg-offset-2 text-center">
                         <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                        <p>123-456-6789</p>
+                        <p>010-9353-7701</p>
                     </div>
                     <div class="col-lg-4 text-center">
                         <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                        <p><a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a></p>
+                        <p><a href="mailto:your-email@your-domain.com">cbocho90@naver.com</a></p>
                     </div>
                 </div>
             </div>
