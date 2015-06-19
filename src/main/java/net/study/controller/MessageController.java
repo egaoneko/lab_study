@@ -91,7 +91,7 @@ public class MessageController {
             throw new ResourceNotFoundException();
         }
 
-        if(message.getReceiveDate() == null) {
+        if(message.getReceiveDate() == null && currentUser.getUser().getId() == message.getReceiver().getId()) {
             message.setReceiveDate(new Date());
             message = messageRepository.save(message);
         }

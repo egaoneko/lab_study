@@ -22,7 +22,7 @@
                 <div class="row-content">
                     <h4 class="list-group-item-heading">${user.name}</h4>
                     <p class="list-group-item-text">
-                    <#if user.contact??>
+                    <#if user.contact??&&user.contact.validEntity == "VALID">
                         <#switch user.contact.contactType.name()>
                             <#case "EMAIL">
                                 <button type="button" class="btn btn-default btn-sm" id="contact_tooltip" data-container="body" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="${user.contact.content}"></button>
