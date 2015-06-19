@@ -1,4 +1,4 @@
-0000000000<#--
+<#--
  * First Editor : Donghyun Seo (egaoneko@naver.com)
  * Last Editor  :
  * Date         : 6/13/15
@@ -101,108 +101,11 @@
             </div>
         </section>
 
-        <section class="no-padding" id="portfolio">
-            <div class="container-fluid">
-                <div class="row no-gutter">
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="#" class="portfolio-box">
-                            <img src="/img/index/1.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Project Name
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="#" class="portfolio-box">
-                            <img src="/img/index/2.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Project Name
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="#" class="portfolio-box">
-                            <img src="/img/index/3.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Project Name
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="#" class="portfolio-box">
-                            <img src="/img/index/4.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Project Name
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="#" class="portfolio-box">
-                            <img src="/img/index/5.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Project Name
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a href="#" class="portfolio-box">
-                            <img src="/img/index/6.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Project Name
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <aside class="bg-dark">
+        <aside class="bg-dark" id="portfolio">
             <div class="container text-center">
                 <div class="call-to-action">
-                    <h2> Project Type </h2>
-                    <a href="#" class="btn btn-default btn-xl wow tada">Download Now!</a>
+                    <h2> Let's go GitHub! </h2>
+                    <a href="https://github.com/egaoneko/lab_study" class="btn btn-default btn-xl wow tada">GitHub</a>
                 </div>
             </div>
         </aside>
@@ -217,7 +120,7 @@
                     </div>
                     <div class="col-lg-4 col-lg-offset-2 text-center">
                         <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                        <p>010-9353-7701</p>
+                        <p>010-0000-0000</p>
                     </div>
                     <div class="col-lg-4 text-center">
                         <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
