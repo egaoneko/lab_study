@@ -2,7 +2,7 @@
 
 ![screenshot](http://egaoneko.github.io/assets/media/lab-study.png)
 
-## 스터디 사이트
+## EFEM
 
 ### 개발 환경
 
