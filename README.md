@@ -1,5 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/egaoneko/lab_study.png?label=ready&title=Ready)](https://waffle.io/egaoneko/lab_study)
 
+![screenshot](http://egaoneko.github.io/assets/media/lab-study.png)
+
 ## 스터디 사이트
 
 ### 개발 환경
